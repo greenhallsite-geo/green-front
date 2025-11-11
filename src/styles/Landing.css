@@ -1,0 +1,649 @@
+@import url(https://db.onlinewebfonts.com/c/61fac1801f2662b5649f5d79a99d17e0?family=Trada+Sans+Black);
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Roman.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Black.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Light\ Italic.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Roman.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+.landing-body {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+}
+
+.container1 {
+  width: 50%;
+  height: 100%;
+  background-color: #001b22;
+  position: relative;
+}
+
+.container2 {
+  width: 50%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+
+.container2-video {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 0;
+}
+
+.container2-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.49));
+  z-index: 1;
+  pointer-events: none;
+}
+
+.container2-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 20px;
+  width: 100%;
+  height: 100%;
+  color: white;
+  text-align: center;
+}
+
+
+.landing-head{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 40px;
+    background: rgb(255, 255, 255);
+}
+
+.landing-content{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    
+}
+
+.container2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.landing-title{
+    font-family: 'Chronicle Display', serif;
+    font-weight: normal;
+    font-size: 3.3rem;
+    font-style: normal;
+    text-align: left;
+    color: #fff;
+    text-align: left;
+    margin-top: 100px;
+    width: 60%;
+}
+
+.landing-title {
+  margin-bottom: 3rem;
+  z-index: 2;
+  position: relative;
+}
+
+.landing-second-title{
+    font-family: 'Chronicle Display', serif;
+    font-weight: normal;
+    font-size: 1rem;
+    font-style: normal;
+    text-align: left;
+    color: #fff;
+    text-align: left;
+    margin-bottom: 6.25rem;
+    width: 60%;
+    font-family: 'Trada Sans', sans-serif;
+    font-weight: 300;
+    letter-spacing: 1px;
+    z-index: 2;
+    position: relative;
+}
+
+
+.landing-content{
+    padding-left: 50px;
+}
+
+@media screen and (max-height: 1010px) {
+  .landing-title {
+    max-width: 87%;
+  }
+}
+@media (max-width: 920px) {
+  .landing-title {
+    margin-bottom: 2.813rem;
+  }
+}
+@media (max-width: 540px) {
+  .landing-title {
+    max-width: 100%;
+    margin-bottom: 2rem;
+  }
+}
+.landing-title h1,
+.landing-title h2,
+.landing-title h3,
+.landing-title h4,
+.landing-title h5,
+.landing-title h6 {
+  max-width: 45.563rem;
+  font-family: "Chronicle Display", sans-serif;
+  font-weight: normal;
+  font-size: 5.5rem;
+  line-height: 5.875rem;
+  font-style: normal;
+  text-align: left;
+  color: #fff;
+}
+@media (max-width: 920px) {
+  .landing-title h1,
+  .landing-title h2,
+  .landing-title h3,
+  .landing-title h4,
+  .landing-title h5,
+  .landing-title h6 {
+    font-size: 4.25rem;
+    line-height: 4.625rem;
+  }
+}
+@media (max-width: 540px) {
+  .landing-title h1,
+  .landing-title h2,
+  .landing-title h3,
+  .landing-title h4,
+  .landing-title h5,
+  .landing-title h6 {
+    font-size: 2rem;
+    line-height: 2.375rem;
+  }
+}
+
+
+.container1::before {
+  content: "";
+  position: absolute;
+  top: 5%;  /* Move down - increase this */
+  right: 0;  /* Move left - use negative value */
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1152.624' height='888.321' viewBox='-9.903 -14.595 1152.624 888.321'%3E%3Cpath fill='%233088df' fill-rule='evenodd' d='M176.231 873.727c-16.155-5.606-31.468-11.513-45.514-17.558-13.842-5.956-26.84-12.213-38.63-18.596-11.619-6.289-22.39-12.875-32.017-19.576-9.484-6.603-18.12-13.5-25.67-20.503-7.436-6.898-14.024-14.089-19.581-21.374-5.473-7.174-10.097-14.637-13.745-22.183-3.59-7.426-6.333-15.137-8.154-22.918a108.355 108.355 0 0 1-2.818-23.561c-.09-9.1.942-18.546 3.07-28.076 2.08-9.316 5.263-18.97 9.462-28.694 4.102-9.497 9.286-19.324 15.407-29.208 5.978-9.648 13.014-19.618 20.914-29.631 7.71-9.772 16.455-19.854 25.993-29.966 9.301-9.862 19.612-20.026 30.647-30.208 10.752-9.922 22.487-20.134 34.878-30.353 12.063-9.949 25.08-20.176 38.688-30.4 95.405-71.679 228.631-150.043 395.979-232.918 65.732-32.553 136.954-66.648 211.687-99.84 59.784-26.556 121.937-53.839 184.732-79.594 55.868-22.915 101.913-43.247 130.701-54.355 31.196-12.038 49.415-18.742 49.596-18.81l.865 5.926c-.18.066-18.389 6.767-49.571 18.8-28.779 11.105-74.808 29.151-130.66 52.06-62.773 25.746-124.904 52.26-184.667 78.805-74.7 33.18-145.89 66.5-211.592 99.038-167.21 82.807-300.305 161.092-395.59 232.679-13.579 10.204-26.566 20.41-38.601 30.335-12.358 10.19-24.059 20.374-34.778 30.266-10.995 10.145-21.267 20.269-30.53 30.093C57.24 573.47 48.54 583.5 40.871 593.22c-7.847 9.945-14.833 19.842-20.765 29.419-6.064 9.79-11.196 19.52-15.254 28.918-4.145 9.596-7.285 19.117-9.335 28.298-2.092 9.37-3.107 18.649-3.017 27.582a106.149 106.149 0 0 0 2.76 23.086c1.785 7.625 4.473 16.702 7.992 23.98 3.583 7.413 8.127 14.745 13.508 21.799 5.477 7.18 11.976 14.273 19.315 21.08 7.468 6.929 16.018 13.756 25.411 20.296 9.553 6.65 20.247 13.188 31.786 19.434 11.728 6.348 25.658 13.053 39.433 18.982 13.991 6.02 28.248 11.905 44.348 17.491l-.823.142Z' data-name='Вычитание 1'/%3E%3C/svg%3E");
+  background-position: right top;
+  pointer-events: none;
+  z-index: 0;
+}
+
+
+.logo1 h1{
+    color: #001b22;
+}
+
+.logo2 h1{
+    color: #001b22;
+}
+
+.logo2 p{
+    color: #001b22;
+}
+
+
+
+
+.logo1 {
+  display: flex;
+  align-items: center;
+  padding-right: 20px;
+  border-right: 2px solid rgba(48, 136, 223, 0.5);
+  margin-right: 20px;
+}
+
+.logo1 h1 {
+  font-family: 'D-DIN', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  color: #3088DF;
+  margin: 0;
+}
+
+.logo2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 2px;
+}
+
+.logo2 h1 {
+  font-family: 'D-DIN', sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.logo2 p {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 300;
+  letter-spacing: 2px;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+
+
+
+
+
+
+    /* Bottom Cubes */
+    .hero-home__links {
+    position: absolute;
+    bottom: 40px;
+    left: 42.5%;
+    display: flex;
+    gap: 1.5rem;
+    z-index: 100;
+
+    }
+
+    .hero-home__link {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem 2.5rem;
+    text-decoration: none;
+    overflow: hidden;
+    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    width: 230px;
+    height: 230px;
+    }
+
+    .hero-home__link:nth-child(1) {
+    background-color: #073D55;
+    }
+
+    .hero-home__link:nth-child(2) {
+    background-color: #537689;
+    }
+
+    .hero-home__link:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-home__link-content {
+    position: relative;
+    z-index: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.8rem;
+    }
+
+    .hero-home__link-text {
+    font-family: "Chronicle Display", sans-serif;
+    font-size: 1.3rem;
+    font-weight: normal;
+    line-height: 1.5;
+    color: #fff;
+    text-align: right;
+    transition: all 0.3s ease;
+    }
+
+    .hero-home__link:hover .hero-home__link-text {
+    transform: translateX(-5px);
+    }
+
+    .hero-home__link-arrows {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    }
+
+    .hero-home__link-arrows span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    position: relative;
+    }
+
+    .hero-home__link-arrows span::before,
+    .hero-home__link-arrows span::after {
+    content: "";
+    display: block;
+    width: 0.563rem;
+    height: 1.063rem;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: contain;
+    transition: all 0.3s ease;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.114' height='17.836' viewBox='0 21.082 11.114 17.836'%3E%3Cpath fill='%23ffffff' fill-rule='evenodd' d='m0 38.918 11.114-8.917L0 21.082v17.836Z' data-name='Path 40932'/%3E%3C/svg%3E");
+    }
+
+    .hero-home__link-arrows span::after {
+    opacity: 0.5;
+    }
+
+    .hero-home__link:hover .hero-home__link-arrows span::before {
+    transform: translateX(3px);
+    }
+
+    .hero-home__link:hover .hero-home__link-arrows span::after {
+    transform: translateX(6px);
+    opacity: 1;
+    }
+
+    /* Responsive */
+    @media (max-width: 920px) {
+    .hero-home__links {
+        left: 50%;
+        transform: translateX(-50%);
+        flex-direction: column;
+        gap: 1rem;
+        bottom: 20px;
+    }
+
+    .hero-home__link {
+        width: 220px;
+        height: 110px;
+        padding: 1.5rem 2rem;
+    }
+
+    .hero-home__link-text {
+        font-size: 1.1rem;
+    }
+    }
+
+
+    .hero-home__link-content {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 0.8rem;
+  width: 100%;
+  align-self: flex-end;
+  padding-bottom: 1rem;
+}
+
+.hero-home__link-text {
+  font-family: "Chronicle Display", sans-serif;
+  font-size: 1.1rem;
+  font-weight: normal;
+  line-height: 1.3;
+  color: #fff;
+  text-align: right;
+  transition: all 0.3s ease;
+}
+
+.hero-home__link:hover .hero-home__link-text {
+  transform: translateX(-3px);
+}
+
+.hero-home__link-arrows {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+}
+
+.hero-home__link-arrows span {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  position: relative;
+}
+
+.hero-home__link-arrows span::before,
+.hero-home__link-arrows span::after {
+  content: "";
+  display: block;
+  width: 0.45rem;
+  height: 0.85rem;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: contain;
+  transition: all 0.3s ease;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='11.114' height='17.836' viewBox='0 21.082 11.114 17.836'%3E%3Cpath fill='%23ffffff' fill-rule='evenodd' d='m0 38.918 11.114-8.917L0 21.082v17.836Z' data-name='Path 40932'/%3E%3C/svg%3E");
+}
+
+.hero-home__link {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 2.5rem;
+  text-decoration: none;
+  overflow: hidden;
+  transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+  width: 230px;
+  height: 230px;
+}
+
+.hero-home__link:nth-child(1) {
+  background-color: #073D55;
+}
+
+.hero-home__link:nth-child(2) {
+  background-color: #537689;
+}
+
+.hero-home__link:hover {
+  transform: scale(0.95);
+  opacity: 0.75;
+}
+
+
+@media (max-width: 768px) {
+  .landing-body {
+    flex-direction: column;
+    height: 100vh;
+    position: relative;
+  }
+
+  /* Hide container1 background */
+  .container1 {
+    position: absolute;
+    width: 100%;
+    height: auto;
+    background: transparent;
+    z-index: 10;
+    top: 0;
+    left: 0;
+  }
+
+  /* Full screen video */
+  .container2 {
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+  }
+
+  .container2-overlay {
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
+  }
+
+  /* Logo at top */
+  .landing-head {
+    background: transparent;
+    padding: 20px;
+    position: relative;
+    z-index: 100;
+  }
+
+  .logo1 h1 {
+    color: #3088DF;
+    font-size: 1.8rem;
+  }
+
+  .logo2 h1 {
+    color: #F4F5F6;
+    font-size: 1.1rem;
+  }
+
+  .logo2 p {
+    color: rgba(244, 245, 246, 0.7);
+    font-size: 0.65rem;
+  }
+
+  /* Content centered on video */
+  .landing-content {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 90%;
+    padding: 0 20px;
+    text-align: center;
+  }
+
+  .landing-title {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 2.4rem;
+    text-align: center;
+    font-size: 2.5rem !important;
+    line-height: 2.8rem !important;
+    color: #fff;
+  }
+
+  .landing-second-title {
+    width: 100%;
+    text-align: center;
+    font-size: 1.4rem !important;
+    line-height: 1.6rem !important;
+    margin-bottom: 2rem;
+    color: #fff;
+    opacity: 0.95;
+  }
+
+  /* Hide blue line */
+  .container1::before {
+    display: none;
+  }
+
+  /* Bottom cubes - smaller, side by side */
+  .hero-home__links {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    z-index: 100;
+  }
+
+  .hero-home__link {
+    width: 150px;
+    height: 150px;
+    padding: 1.5rem 1rem;
+  }
+
+  .hero-home__link-content {
+    padding-bottom: 0.5rem;
+  }
+
+  .hero-home__link-text {
+    font-size: 0.85rem;
+    line-height: 1.2;
+  }
+
+  .hero-home__link-arrows span::before,
+  .hero-home__link-arrows span::after {
+    width: 0.35rem;
+    height: 0.65rem;
+  }
+}
+
+/* Even smaller phones */
+@media (max-width: 480px) {
+  .landing-title {
+    font-size: 2rem !important;
+    line-height: 2.3rem !important;
+  }
+
+  .landing-second-title {
+    font-size: 1rem !important;
+    line-height: 1.5rem !important;
+  }
+
+  .hero-home__link {
+    width: 130px;
+    height: 130px;
+  }
+
+  .hero-home__link-text {
+    font-size: 0.75rem;
+  }
+
+  .logo1 h1 {
+    font-size: 1.5rem;
+  }
+
+  .logo2 h1 {
+    font-size: 0.95rem;
+  }
+}
