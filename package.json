@@ -2,7 +2,7 @@
   "name": "green-site",
   "version": "0.1.0",
   "private": true,
-"homepage": "https://greenhallsite-geo.github.io/greenhall",
+  "homepage": "https://greenhallsite-geo.github.io/greenhall",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.9.1",
