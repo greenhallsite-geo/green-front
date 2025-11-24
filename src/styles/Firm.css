@@ -1,0 +1,386 @@
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Roman.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Black.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Light\ Italic.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Roman.otf') format('opentype');
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+.firm-card-number{
+        font-family: "Chronicle", sans-serif;
+    font-size: 2.8rem;
+    font-weight: normal;
+    line-height: 1.5rem;
+    font-style: normal;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
+.firm-card-text p{
+        font-family: "Trada Sans", sans-serif;
+        font-size: 0.9rem;
+        font-weight: 300;
+}
+
+.firm-title{
+        margin-bottom: 1.7rem;
+    top: -0.4rem;
+    font-size: 3.8rem;
+    font-weight: 300;
+    position: relative;
+}
+
+.firm-text{
+    font-family: "Trada Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 300;
+    font-style: normal;
+    text-align: left;
+    color: #000;
+}
+
+.firm-body {
+  background-color: #Fff;
+  padding: 7.25rem 0;
+  width: 100%;
+}
+
+@media (max-width: 540px) {
+  .firm-body {
+    padding: 2.9rem 0 3.55rem;
+  }
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 920px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+.firm-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+}
+
+@media (max-width: 540px) {
+  .firm-wrapper {
+    gap: 0.25rem;
+  }
+}
+
+/* Heading */
+.firm-heading {
+    font-family: "Trada Sans", sans-serif;
+    font-size: 1.25rem;
+    font-weight: normal;
+    line-height: 2.25rem;
+    font-style: normal;
+    text-align: left;
+    color: #537689;
+    text-transform: uppercase;
+    letter-spacing: 0.12rem;
+}
+
+/* Cards Grid */
+.firm-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.25rem 1.35rem;
+  width: 100%;
+  aspect-ratio: 4 / 2; /* Keeps grid proportional */
+}
+
+@media (max-width: 1024px) {
+  .firm-cards {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+  }
+}
+
+@media (max-width: 540px) {
+  .firm-cards {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+/* Content Block - What We Do */
+.firm-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  grid-column: span 2;
+  aspect-ratio: 2 / 1; /* 2 squares wide, 1 square tall */
+}
+
+
+
+@media (max-width: 540px) {
+  .firm-content {
+    grid-column: span 1;
+    aspect-ratio: auto;
+  }
+}
+
+/* Image Cards - SQUARE */
+.firm-card {
+  position: relative;
+  overflow: hidden;
+  background-color: #fff;
+  aspect-ratio: 1 / 1; /* Perfect square */
+}
+
+.firm-card--type1,
+.firm-card--type2 {
+  grid-column: span 1;
+  aspect-ratio: 1 / 1; /* Square */
+}
+
+@media (max-width: 540px) {
+  .firm-card--type1,
+  .firm-card--type2 {
+    height: 20rem;
+    aspect-ratio: auto;
+  }
+}
+
+.firm-card-image {
+  width: 100%;
+  height: 100%;
+}
+
+.firm-card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.firm-card:hover .firm-card-image img {
+  transform: scale(1.05);
+}
+
+/* Logo on Image Card 2 */
+.firm-card--type2 {
+  position: relative;
+}
+
+.firm-card-logo {
+  position: absolute;
+  bottom: 2rem;
+  left: 2rem;
+  width: 200px;
+  z-index: 2;
+}
+
+.firm-card-logo img {
+  width: 100%;
+  height: auto;
+  filter: brightness(0) invert(1);
+}
+
+@media (max-width: 540px) {
+  .firm-card-logo {
+    width: 150px;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+}
+
+/* Stats Cards - SQUARE */
+.firm-card--type3 {
+  padding: 2.563rem 2.688rem 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.625rem;
+  aspect-ratio: 1 / 1; /* Square */
+  transition: transform 0.3s ease;
+}
+
+.firm-card--type3:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 1024px) {
+  .firm-card--type3 {
+    grid-column: span 1;
+  }
+}
+
+
+
+
+
+
+/* Line on top of 2nd stats card */
+.firm-card--type3:nth-child(5) {
+  border-top: 1px solid #2C5F4D;
+}
+
+/* Line on bottom of last stats card */
+.firm-card--border-bottom {
+  border-bottom: 1px solid #2C5F4D;
+}
+
+
+
+
+/* Tablet & Mobile Responsive */
+@media (max-width: 1024px) {
+  .firm-body {
+    padding: 4rem 0;
+  }
+
+  .firm-heading {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+
+  .firm-cards {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    gap: 1rem;
+    aspect-ratio: auto;
+  }
+
+  /* What We Do - Full Width on Top */
+  .firm-content {
+    grid-column: span 2;
+    aspect-ratio: auto;
+  }
+
+  .firm-title {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .firm-text {
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+  }
+
+  /* Image Cards - 2 per row */
+  .firm-card--type1,
+  .firm-card--type2 {
+    grid-column: span 1;
+  }
+
+  /* Stats Cards - 2 per row (3 rows total) */
+  .firm-card--type3 {
+    padding: 2rem 1.5rem;
+  }
+
+  .firm-card-number {
+    font-size: 2.5rem;
+  }
+
+  .firm-card-text p {
+    font-size: 0.85rem;
+  }
+
+  .firm-card-logo {
+    width: 150px;
+    bottom: 1.5rem;
+    left: 1.5rem;
+  }
+}
+/* Mobile Responsive - 2 cards per row */
+@media (max-width: 540px) {
+  .firm-body {
+    padding: 2.5rem 0;
+  }
+
+  .firm-heading {
+    font-size: 1rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .firm-cards {
+    grid-template-columns: repeat(2, 1fr); /* 2 cards per row */
+    gap: 0.8rem;
+  }
+
+  /* What We Do - Full Width on Top */
+  .firm-content {
+    grid-column: span 2; /* Takes full width */
+    padding-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  .firm-title {
+    font-size: 2.4rem;
+    line-height: 2.2rem;
+    margin-bottom: 1rem;
+    text-align: left;
+  }
+
+  .firm-text {
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+    text-align: left;
+  }
+
+  /* All Cards - 2 per row */
+  .firm-card--type1,
+  .firm-card--type2 {
+    grid-column: span 1;
+    height: auto;
+    aspect-ratio: 1 / 1;
+  }
+
+  .firm-card--type3 {
+    grid-column: span 1;
+    padding: 1.5rem 1rem;
+    aspect-ratio: 1 / 1;
+  }
+
+  .firm-card-number {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .firm-card-text p {
+    font-size: 0.75rem;
+    line-height: 1.1rem;
+  }
+
+  .firm-card-logo {
+    width: 100px;
+    bottom: 1rem;
+    left: 1rem;
+  }
+}

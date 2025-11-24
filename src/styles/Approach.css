@@ -1,0 +1,467 @@
+.approach-body {
+  background-color: #001B22;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+@media (max-width: 540px) {
+  .approach-body {
+    margin-bottom: 0;
+  }
+}
+
+/* Background */
+.approach-background {
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  padding: 1.25rem;
+  display: flex;
+  align-items: flex-end;
+}
+
+@media (max-width: 920px) {
+  .approach-background {
+    padding: 0;
+  }
+}
+
+.approach-background-image {
+  max-height: 44.063rem;
+  height: 100%;
+  width: 100%;
+}
+
+@media (max-width: 920px) {
+  .approach-background-image {
+    max-height: 59%;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-background-image {
+    height: 49.3rem;
+    max-height: none;
+  }
+}
+
+.approach-background-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Container */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+  position: relative;
+  z-index: 2;
+}
+
+@media (max-width: 920px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+/* Wrapper */
+.approach-wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 9rem 0 14rem;
+  gap: 1.5rem;
+}
+
+@media (max-width: 920px) {
+  .approach-wrapper {
+    padding: 6rem 0 4rem;
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-wrapper {
+    padding: 5rem 0 2.5rem;
+  }
+}
+
+/* Cards Grid - SMALLER */
+.approach-cards {
+  display: grid;
+  grid-template-columns: repeat(4, 18rem);
+  grid-template-rows: repeat(2, 18rem);
+  gap: 1rem;
+  width: 100%;
+}
+
+@media (max-width: 920px) {
+  .approach-cards {
+    grid-template-columns: repeat(2, 18rem);
+    grid-template-rows: auto repeat(2, 18rem);
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-cards {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto repeat(4, 9rem);
+    gap: 0.8rem;
+  }
+}
+
+/* Header Content */
+.approach-content {
+  grid-area: 1 / 1 / 2 / 3;
+  padding-top: 2rem;
+}
+
+@media (max-width: 540px) {
+  .approach-content {
+    grid-area: 1;
+    padding-top: 0;
+  }
+}
+
+.approach-heading {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: normal;
+  line-height: 1.6rem;
+  font-style: normal;
+  text-align: left;
+  color: #fff;
+  text-transform: uppercase;
+  margin-bottom: 1rem;
+  display: block;
+  letter-spacing: 0.1rem;
+}
+
+@media (max-width: 920px) {
+  .approach-heading {
+    margin-bottom: 0.8rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-heading {
+    font-size: 0.8rem;
+    margin-bottom: 0.4rem;
+  }
+}
+
+.approach-title {
+  color: #fff;
+  font-family: "Chronicle Display", sans-serif;
+  font-size: 2.5rem;
+  font-weight: normal;
+  line-height: 3rem;
+  font-style: normal;
+  text-align: left;
+  margin: 0;
+  margin-bottom: 2rem;
+  max-width: 400px;
+}
+
+@media (max-width: 920px) {
+  .approach-title {
+    font-size: 2.8rem;
+    line-height: 3.2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-title {
+    max-width: 100%;
+    margin-bottom: 1.2rem;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+  }
+}
+
+/* Cards */
+.approach-card {
+  position: relative;
+  padding: 1.2rem 1.5rem 1.2rem;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.3rem;
+  transition: transform 0.3s ease;
+}
+
+@media (max-width: 920px) {
+  .approach-card {
+    padding: 1.2rem 1.5rem 1.2rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-card {
+    padding: 2rem 1.5rem;
+    justify-content: center;
+    gap: 0.1rem;
+  }
+}
+
+.approach-card:hover {
+  transform: translateY(-5px);
+}
+
+.approach-card:nth-child(3) {
+  z-index: 3;
+}
+
+.approach-card:nth-child(4) {
+  grid-area: 2 / 3 / 3 / 4;
+}
+
+@media (max-width: 920px) {
+  .approach-card:nth-child(4) {
+    grid-area: auto;
+  }
+}
+
+.approach-card:nth-child(5) {
+  grid-area: 2 / 4 / 3 / 5;
+  z-index: 3;
+}
+
+@media (max-width: 920px) {
+  .approach-card:nth-child(5) {
+    grid-area: auto;
+  }
+}
+
+.approach-card-number {
+  font-family: "Chronicle Display", sans-serif;
+  font-size: 2.2rem;
+  font-weight: normal;
+  line-height: 2.6rem;
+  font-style: normal;
+  text-align: left;
+}
+
+@media (max-width: 920px) {
+  .approach-card-number {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-card-number {
+    font-size: 1.8rem;
+    line-height: 2.2rem;
+  }
+}
+
+.approach-card-text {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.4rem;
+  font-style: normal;
+  text-align: left;
+}
+
+@media (max-width: 920px) {
+  .approach-card-text {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-card-text {
+    font-size: 0.85rem;
+    line-height: 1.3rem;
+  }
+}
+
+.approach-card-text p,
+.approach-card-text span,
+.approach-card-text strong {
+  color: inherit;
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 300;
+  line-height: 1.4rem;
+  font-style: normal;
+  text-align: left;
+}
+
+@media (max-width: 920px) {
+  .approach-card-text p,
+  .approach-card-text span,
+  .approach-card-text strong {
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-card-text p,
+  .approach-card-text span,
+  .approach-card-text strong {
+    font-size: 0.85rem;
+    line-height: 1.3rem;
+  }
+}
+
+
+@media (max-width: 1024px) {
+  .approach-cards {
+    grid-template-columns: repeat(4, 14rem);
+    grid-template-rows: repeat(2, 14rem);
+    gap: 0.8rem;
+  }
+  
+  .approach-card-number {
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+  }
+  
+  .approach-card-text,
+  .approach-card-text p,
+  .approach-card-text span,
+  .approach-card-text strong {
+    font-size: 0.85rem;
+    line-height: 1.2rem;
+  }
+}
+@media (max-width: 1280px) {
+  .approach-cards {
+    grid-template-columns: repeat(4, 15rem);
+    grid-template-rows: repeat(2, 15rem);
+  }
+  
+  .approach-wrapper {
+    padding: 7rem 0 11rem;
+  }
+  
+  .approach-card {
+    padding: 1rem 1.3rem 1rem;
+  }
+  
+  .approach-title {
+    font-size: 2rem;
+    line-height: 2.4rem;
+  }
+  
+  .approach-card-number {
+    font-size: 1.9rem;
+    line-height: 2.2rem;
+  }
+}
+
+.approach-background-image {
+  max-height: none; /* Remove height restriction */
+  height: auto; /* Let it size naturally */
+  width: 100%;
+}
+
+.approach-image {
+  width: 100%;
+  height: auto; /* Maintain aspect ratio */
+  object-fit: contain; /* Show full image without cropping */
+  object-position: center;
+  display: block;
+}
+
+@media (max-width: 920px) {
+  .approach-background-image {
+    max-height: none;
+    height: auto;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-background-image {
+    height: auto;
+    max-height: none;
+  }
+}
+
+
+/* Remove the margin-left from approach-cards */
+.approach-cards {
+
+  margin-left: 14px; /* Remove any left margin */
+}
+
+
+@media (max-width: 1280px) {
+  .approach-cards {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 1024px) {
+  .approach-cards {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 920px) {
+  .approach-cards {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: 540px) {
+  .approach-cards {
+    margin-left: 0;
+  }
+}
+
+
+
+@media (max-width: 768px) {
+  .approach-cards {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto repeat(4, auto);
+    gap: 1rem;
+    margin-left: 0;
+  }
+  
+  .approach-content {
+    grid-area: auto;
+  }
+  
+  .approach-card {
+    min-height: 180px;
+    aspect-ratio: auto;
+  }
+  
+  .approach-card:nth-child(4),
+  .approach-card:nth-child(5) {
+    grid-area: auto;
+  }
+  .approach-image{
+    display: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .approach-cards {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto repeat(4, auto);
+    gap: 0.8rem;
+    margin-left: 0;
+  }
+  
+  .approach-card {
+    min-height: 160px;
+    padding: 1.8rem 1.5rem;
+  }
+  .approach-image{
+    display: none;
+  }
+}

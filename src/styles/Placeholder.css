@@ -1,0 +1,150 @@
+.placeholder-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+  min-height: 70vh;
+}
+
+.placeholder-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.placeholder-header h1 {
+  font-family: "Chronicle Display", serif;
+  font-size: 3rem;
+  font-weight: 300;
+  color: #001B22;
+  margin: 0;
+}
+
+.logout-button {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid #001B22;
+  color: #001B22;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.logout-button:hover {
+  background-color: #001B22;
+  color: #fff;
+}
+
+.placeholder-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.placeholder-box {
+  background: #f9f9f9;
+  border: 2px dashed #ccc;
+  padding: 3rem;
+  border-radius: 8px;
+}
+
+.placeholder-box h2 {
+  font-family: "Chronicle Display", serif;
+  font-size: 2rem;
+  font-weight: 300;
+  color: #001B22;
+  margin: 0 0 1rem 0;
+}
+
+.placeholder-box > p {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: #666;
+  line-height: 1.8;
+  margin: 0 0 2rem 0;
+}
+
+.placeholder-instructions {
+  background: white;
+  padding: 2rem;
+  border-radius: 4px;
+  margin-bottom: 2rem;
+  border-left: 4px solid #3088DF;
+}
+
+.placeholder-instructions h3 {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #001B22;
+  margin: 0 0 1rem 0;
+}
+
+.placeholder-instructions ul {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #001B22;
+  line-height: 1.8;
+  margin: 0;
+  padding-left: 1.5rem;
+}
+
+.placeholder-instructions li {
+  margin-bottom: 0.5rem;
+}
+
+.placeholder-embed-area {
+  background: white;
+  border: 2px dashed #3088DF;
+  padding: 4rem 2rem;
+  border-radius: 4px;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.embed-placeholder-text {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 300;
+  color: #999;
+  text-align: center;
+  line-height: 1.8;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .placeholder-container {
+    padding: 2rem 1rem;
+  }
+
+  .placeholder-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .placeholder-header h1 {
+    font-size: 2rem;
+  }
+
+  .placeholder-box {
+    padding: 2rem 1.5rem;
+  }
+
+  .placeholder-instructions {
+    padding: 1.5rem;
+  }
+
+  .placeholder-embed-area {
+    padding: 3rem 1rem;
+    min-height: 300px;
+  }
+}

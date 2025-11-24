@@ -1,0 +1,129 @@
+/* Title Text Component */
+.title_text {
+  background-color: #ffffff;
+  width: 100%;
+}
+
+/* Container */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 920px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Wrapper */
+.title_text__wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  padding: 6.4rem 0 4.2rem;
+}
+
+@media (max-width: 920px) {
+  .title_text__wrapper {
+    padding: 1.2rem 0 3.375rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .title_text__wrapper {
+    padding: 1.4rem 0;
+  }
+}
+
+/* Content */
+.title_text__content {
+  width: 100%;
+}
+
+/* Additional */
+.title_text__additional {
+  padding-bottom: 1.9rem;
+}
+
+@media (max-width: 920px) {
+  .title_text__additional {
+    padding-bottom: 1.9rem;
+  }
+}
+
+/* Title */
+.title_text__title {
+  font-family: "Chronicle Display", serif;
+  font-size: 3.8rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #000000;
+  margin: 0;
+  margin-bottom: 2.938rem;
+}
+
+@media (max-width: 920px) {
+  .title_text__title {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .title_text__title {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+/* Text */
+.title_text__text {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6;
+  color: #000000;
+  margin: 0;
+}
+
+@media (max-width: 540px) {
+  .title_text__text {
+    font-size: 1.125rem;
+    line-height: 1.75rem;
+    width: 95%;
+  }
+}
+
+/* Section Title Utility */
+.section-title {
+  font-weight: 300;
+}
+
+/* Animation Classes */
+.anim-text {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.anim-text._active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+._anim-items {
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+._anim-items._active {
+  transform: translateY(0);
+  opacity: 1;
+}

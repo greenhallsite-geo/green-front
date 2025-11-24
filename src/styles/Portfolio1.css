@@ -1,0 +1,261 @@
+.six-blocks {
+  background-color: #Fff;
+  padding: 7.25rem 0;
+  width: 100%;
+}
+
+@media (max-width: 540px) {
+  .six-blocks {
+    padding: 2.9rem 0 3.55rem;
+  }
+}
+
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 920px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+.six-blocks__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+}
+
+@media (max-width: 540px) {
+  .six-blocks__wrapper {
+    gap: 0.25rem;
+  }
+}
+
+/* Heading */
+.six-blocks__heading {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 1.25rem;
+  font-weight: normal;
+  line-height: 2.25rem;
+  font-style: normal;
+  text-align: left;
+  color: #537689;
+  text-transform: uppercase;
+  letter-spacing: 0.12rem;
+}
+
+/* Cards Grid - 4 columns, 2 rows (2 content + 6 cards) */
+.six-blocks__cards {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.25rem 1.35rem;
+  width: 100%;
+  aspect-ratio: 4 / 2;
+}
+
+@media (max-width: 1024px) {
+  .six-blocks__cards {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto;
+    aspect-ratio: auto;
+  }
+}
+
+@media (max-width: 540px) {
+  .six-blocks__cards {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.8rem;
+  }
+}
+
+/* Content Block - Strategic Footprint (spans 2 columns) */
+.six-blocks__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1.5rem;
+  grid-column: span 2;
+  aspect-ratio: 2 / 1;
+}
+
+@media (max-width: 540px) {
+  .six-blocks__content {
+    grid-column: span 2;
+    aspect-ratio: auto;
+    padding-bottom: 1.5rem;
+  }
+}
+
+.six-blocks__title {
+  font-family: "Chronicle Display", sans-serif;
+  font-size: 3.8rem;
+  font-weight: 300;
+  line-height: 4.2rem;
+  font-style: normal;
+  text-align: left;
+  color: #000;
+  margin: 0;
+  margin-bottom: 1.7rem;
+  position: relative;
+  top: -0.4rem;
+}
+
+@media (max-width: 1024px) {
+  .six-blocks__title {
+    font-size: 2.5rem;
+    line-height: 3rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .six-blocks__title {
+    font-size: 2.4rem;
+    line-height: 2.2rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.six-blocks__text {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  line-height: 1.6rem;
+  font-style: normal;
+  text-align: left;
+  color: #000;
+  margin: 0;
+}
+
+@media (max-width: 1024px) {
+  .six-blocks__text {
+    font-size: 0.95rem;
+    line-height: 1.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .six-blocks__text {
+    font-size: 0.9rem;
+    line-height: 1.4rem;
+  }
+}
+
+/* Stats Cards - SQUARE (same size as firm cards) */
+.six-blocks__card--type3 {
+  padding: 2.563rem 2.688rem 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  gap: 0.625rem;
+  aspect-ratio: 1 / 1;
+  transition: transform 0.3s ease;
+}
+
+.six-blocks__card--type3:hover {
+  transform: translateY(-5px);
+}
+
+@media (max-width: 1024px) {
+  .six-blocks__card--type3 {
+    padding: 2rem 1.5rem;
+    grid-column: span 1;
+  }
+}
+
+@media (max-width: 540px) {
+  .six-blocks__card--type3 {
+    padding: 1.5rem 1rem;
+    grid-column: span 1;
+  }
+}
+
+.six-blocks__card-number {
+  font-family: "Chronicle Display", sans-serif;
+  font-size: 2.8rem;
+  font-weight: normal;
+  line-height: 1.5rem;
+  font-style: normal;
+  text-align: left;
+  margin: 0;
+  margin-bottom: 5px;
+}
+
+@media (max-width: 1024px) {
+  .six-blocks__card-number {
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .six-blocks__card-number {
+    font-size: 2rem;
+  }
+}
+
+.six-blocks__card-text {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.3rem;
+  font-style: normal;
+  text-align: left;
+}
+
+.six-blocks__card-text p {
+  margin: 0;
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+}
+
+@media (max-width: 1024px) {
+  .six-blocks__card-text p {
+    font-size: 0.85rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .six-blocks__card-text p {
+    font-size: 0.75rem;
+    line-height: 1.1rem;
+  }
+}
+
+/* Border top for specific cards */
+.six-blocks__card--border-top {
+  border-top: 1px solid #2C5F4D;
+}
+
+/* Footnote */
+.six-blocks__footnote {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #E0E0E0;
+}
+
+.six-blocks__footnote p {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.85rem;
+  font-weight: 300;
+  line-height: 1.4rem;
+  color: #666;
+  margin: 0;
+}
+
+@media (max-width: 540px) {
+  .six-blocks__footnote {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+  }
+
+  .six-blocks__footnote p {
+    font-size: 0.75rem;
+    line-height: 1.2rem;
+  }
+}

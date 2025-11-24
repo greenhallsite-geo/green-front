@@ -1,19 +1,15 @@
 import React from 'react'
 import '../styles/Landing.css'
-
 const video = `${process.env.PUBLIC_URL}/video.mp4`;
+const logo = `${process.env.PUBLIC_URL}/l3.png`;
 
 function Landing() {
   return (
     <div className='landing-body'>
       <div className="container1">
         <div className="landing-head">
-          <div className="logo1">
-            <h1>GCP</h1>
-          </div>
-          <div className="logo2">
-            <h1>Greenhall</h1>
-            <p>capital partners</p>
+          <div className="logo-container">
+            <img src={logo} alt="Greenhall Capital Partners" className="logo-image" />
           </div>
         </div>
         <div className="landing-content">
@@ -25,7 +21,6 @@ function Landing() {
           </div>
         </div>
       </div>
-      
       <div className="container2">
         <video className="container2-video" autoPlay loop muted playsInline>
           <source src={video} type="video/mp4" />
@@ -35,29 +30,27 @@ function Landing() {
           {/* Your content here */}
         </div>
       </div>
-
       {/* Bottom Cubes */}
-<div className="hero-home__links">
-  <a href="#firm" className="hero-home__link">
-    <div className="hero-home__link-content">
-      <span className="hero-home__link-text">Discover GCP</span>
-      <span className="hero-home__link-arrows">
-        <span></span>
-      </span>
-    </div>
-  </a>
-  
-  <a href="/portfolio" className="hero-home__link">
-    <div className="hero-home__link-content">
-      <span className="hero-home__link-text">Our Portfolio</span>
-      <span className="hero-home__link-arrows">
-        <span></span>
-      </span>
-    </div>
-  </a>
-</div>
+      <div className="hero-home__links">
+        <a href="#firm" className="hero-home__link">
+          <div className="hero-home__link-content">
+            <span className="hero-home__link-text">Discover GCP</span>
+            <span className="hero-home__link-arrows">
+              <span></span>
+            </span>
+          </div>
+        </a>
+        <a href="/portfolio" className="hero-home__link">
+          <div className="hero-home__link-content">
+            <span className="hero-home__link-text">Our Portfolio</span>
+            <span className="hero-home__link-arrows">
+              <span></span>
+            </span>
+          </div>
+        </a>
+      </div>
     </div>
   )
 }
 
-export default Landing
+export default Landing;

@@ -1,0 +1,209 @@
+/* Partners Component */
+.our-partners {
+  background-color: #35563B;
+  height: 87vh;
+}
+
+@media (max-width: 540px) {
+  .our-partners {
+    margin-top: 1.75rem;
+  }
+}
+
+/* Container */
+.container {
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+@media (max-width: 920px) {
+  .container {
+    padding: 0 20px;
+  }
+}
+
+@media (max-width: 540px) {
+  .container {
+    padding: 0 16px;
+  }
+}
+
+/* Wrapper */
+.our-partners__wrapper {
+  padding-top: 5.8rem;
+  padding-bottom: 6.5rem;
+}
+
+@media (max-width: 920px) {
+  .our-partners__wrapper {
+    padding-top: 4.5rem;
+    padding-bottom: 4rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .our-partners__wrapper {
+    padding-top: 3.5rem;
+    padding-bottom: 3.5rem;
+  }
+}
+
+/* Title */
+.our-partners__title {
+  font-family: "Chronicle Display", serif;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  color: #ffffff;
+  max-width: 52rem;
+  margin-bottom: 6.5rem;
+}
+
+@media (max-width: 920px) {
+  .our-partners__title {
+    max-width: 100%;
+    font-size: 2.5rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .our-partners__title {
+    font-size: 1.5rem;
+    line-height: 1.75rem;
+    margin-bottom: 2rem;
+  }
+}
+
+/* List */
+.our-partners__list {
+  display: grid;
+  width: 100%;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+@media (max-width: 920px) {
+  .our-partners__list {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Item */
+.our-partners__item {
+  width: 100%;
+  height: 16.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(90deg, white 50.75rem, transparent 0) no-repeat, 
+              linear-gradient(90deg, white 50.75rem, transparent 0) no-repeat, 
+              linear-gradient(0deg, white 25rem, transparent 0) no-repeat, 
+              linear-gradient(0deg, white 25rem, transparent 0) no-repeat;
+  background-size: 50.75rem 0.0625rem, 50.75rem 0.0625rem, 0.0625rem 25rem, 0.0625rem 25rem;
+  background-position: 0.55rem 0, 0.55rem 100%, 0 0.625rem, 100% 0.625rem;
+}
+
+@media (max-width: 920px) {
+  .our-partners__item {
+    width: 49.8rem;
+    background: linear-gradient(90deg, white 48rem, transparent 0) no-repeat, 
+                linear-gradient(90deg, white 48rem, transparent 0) no-repeat, 
+                linear-gradient(0deg, white 25rem, transparent 0) no-repeat, 
+                linear-gradient(0deg, white 25rem, transparent 0) no-repeat;
+    background-size: 50.75rem 0.0625rem, 50.75rem 0.0625rem, 0.0625rem 25rem, 0.0625rem 25rem;
+    background-position: 0.85rem 0, 0.85rem 100%, 0 0.625rem, 100% 0.625rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .our-partners__item {
+    width: 19.3rem;
+    height: 10.65rem;
+    background: linear-gradient(90deg, white 18.5rem, transparent 0) no-repeat, 
+                linear-gradient(90deg, white 18.5rem, transparent 0) no-repeat, 
+                linear-gradient(0deg, white 9.75rem, transparent 0) no-repeat, 
+                linear-gradient(0deg, white 9.75rem, transparent 0) no-repeat;
+    background-size: 18.5rem 0.0516rem, 18.5rem 0.0516rem, 0.0516rem 9.75rem, 0.0516rem 9.75rem;
+    background-position: 0.45rem 0, 0.45rem 100%, 0 0.516rem, 100% 0.516rem;
+  }
+}
+
+/* Logo */
+.our-partners__logo {
+  width: 21.938rem;
+  height: 10.213rem;
+  display: block;
+  position: relative;
+}
+
+@media (max-width: 540px) {
+  .our-partners__logo {
+    width: 13.023rem;
+    height: 6.826rem;
+  }
+}
+
+.our-partners__logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+/* Footnote */
+.our-partners__footnote {
+  padding-top: 3.19rem;
+}
+
+.our-partners__footnote p, 
+.our-partners__footnote span {
+  font-size: 0.8rem;
+  font-weight: 300;
+  font-family: "Trada Sans", sans-serif;
+  font-style: italic;
+  color: #fff;
+  margin: 0;
+}
+
+@media (max-width: 1440px) {
+  .our-partners__footnote p, 
+  .our-partners__footnote span {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .our-partners__footnote p, 
+  .our-partners__footnote span {
+    font-size: 1.25rem;
+  }
+}
+
+@media (max-width: 540px) {
+  .our-partners__footnote p, 
+  .our-partners__footnote span {
+    font-size: 0.75rem;
+    line-height: 1rem;
+  }
+}
+
+/* Animation Classes */
+.anim-text {
+  transform: translateY(20px);
+  opacity: 0;
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+.anim-text._active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+._anim-items {
+  transition: transform 0.6s ease, opacity 0.6s ease;
+}
+
+._anim-items._active {
+  transform: translateY(0);
+  opacity: 1;
+}

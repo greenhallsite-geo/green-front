@@ -1,0 +1,152 @@
+.company-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+}
+
+@media (max-width: 768px) {
+  .company-container {
+    padding: 2rem 1rem;
+  }
+}
+
+/* Back Button */
+.back-button {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  padding: 0.75rem 1.5rem;
+  background-color: transparent;
+  border: 1px solid #001B22;
+  color: #001B22;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-bottom: 3rem;
+}
+
+.back-button:hover {
+  background-color: #001B22;
+  color: #fff;
+}
+
+/* Company Header */
+.company-header {
+  text-align: center;
+  margin-bottom: 4rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.company-logo {
+  width: 200px;
+  height: 200px;
+  margin: 0 auto 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #f5f5f5;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06);
+}
+
+@media (max-width: 768px) {
+  .company-logo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.company-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.company-logo-placeholder {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #666;
+  padding: 2rem;
+  text-align: center;
+}
+
+.company-name {
+  font-family: "Chronicle Display", serif;
+  font-size: 3rem;
+  font-weight: normal;
+  color: #001B22;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .company-name {
+    font-size: 2rem;
+  }
+}
+
+/* Company Description */
+.company-description {
+  margin-bottom: 3rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid #e0e0e0;
+}
+
+.company-description p {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 300;
+  color: #001B22;
+  line-height: 1.8;
+  margin: 0;
+}
+
+/* Company Details Grid */
+.company-details-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+.company-detail-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+}
+
+.detail-label {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #001B22;
+  min-width: 180px;
+  flex-shrink: 0;
+}
+
+.detail-value {
+  font-family: 'Trada Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 300;
+  color: #001B22;
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .company-description p {
+    font-size: 1rem;
+  }
+
+  .company-detail-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .detail-label {
+    min-width: auto;
+    font-size: 0.9rem;
+  }
+
+  .detail-value {
+    font-size: 0.95rem;
+  }
+}
