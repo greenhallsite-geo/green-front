@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/green-front/static/css/main.8e1003ac.css",
+    "main.js": "/green-front/static/js/main.0fcd5ade.js",
+    "static/media/Chronicle Display Light Italic.otf": "/green-front/static/media/Chronicle Display Light Italic.bc8515f3cb222844a819.otf",
+    "static/media/Chronicle Display Black.otf": "/green-front/static/media/Chronicle Display Black.77c17052c8c11c51c180.otf",
+    "static/media/Chronicle Display Roman.otf": "/green-front/static/media/Chronicle Display Roman.abfcdb14bb9b84b8bbdb.otf",
+    "index.html": "/green-front/index.html",
+    "main.8e1003ac.css.map": "/green-front/static/css/main.8e1003ac.css.map",
+    "main.0fcd5ade.js.map": "/green-front/static/js/main.0fcd5ade.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.8e1003ac.css",
+    "static/js/main.0fcd5ade.js"
+  ]
+}
