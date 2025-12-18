@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/green-front/static/css/main.a562ff9d.css",
-    "main.js": "/green-front/static/js/main.daf37f7a.js",
+    "main.css": "/green-front/static/css/main.4f8e12aa.css",
+    "main.js": "/green-front/static/js/main.caaa7dd2.js",
     "static/media/Chronicle Display Light Italic.otf": "/green-front/static/media/Chronicle Display Light Italic.bc8515f3cb222844a819.otf",
     "static/media/Chronicle Display Black.otf": "/green-front/static/media/Chronicle Display Black.77c17052c8c11c51c180.otf",
     "static/media/Chronicle Display Roman.otf": "/green-front/static/media/Chronicle Display Roman.abfcdb14bb9b84b8bbdb.otf",
     "index.html": "/green-front/index.html",
-    "main.a562ff9d.css.map": "/green-front/static/css/main.a562ff9d.css.map",
-    "main.daf37f7a.js.map": "/green-front/static/js/main.daf37f7a.js.map"
+    "main.4f8e12aa.css.map": "/green-front/static/css/main.4f8e12aa.css.map",
+    "main.caaa7dd2.js.map": "/green-front/static/js/main.caaa7dd2.js.map"
   },
   "entrypoints": [
-    "static/css/main.a562ff9d.css",
-    "static/js/main.daf37f7a.js"
+    "static/css/main.4f8e12aa.css",
+    "static/js/main.caaa7dd2.js"
   ]
 }
