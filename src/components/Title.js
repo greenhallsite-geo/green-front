@@ -10,9 +10,19 @@ function Title() {
             <h2 className="title_text__title section-title anim-text _anim-items _active">
               Partnering for Impact and Growth
             </h2>
-            <p className="title_text__text anim-text _anim-items _active">
-              Greenhall specializes in working closely with exceptional management teams to unlock and enhance the value of their existing assets or those they are considering divesting. Through close collaboration and the execution of strategic plans, we aim to identify and optimize core competencies. Our unique industry insights, coupled with our proven experience across diverse business cycles, allow us to provide tailored support and create added value for our partners.
-            </p>
+           <p className="title_text__text anim-text _anim-items _active">
+  These affiliations reflect our commitment to responsible stewardship, inclusive
+  leadership, and continuous improvement across our organization.
+  For more information on our ESG policy, please visit:{' '}
+  <a 
+    href="https://www.greenhallcapital.com/esg-policy" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ color: '#007bff', textDecoration: 'underline' }}
+  >
+    https://www.greenhallcapital.com/esg-policy
+  </a>
+</p>
           </div>
         </div>
       </div>

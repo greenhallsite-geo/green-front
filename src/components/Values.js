@@ -44,7 +44,7 @@ function Values() {
               Our Philosophy
             </h2>
             <div className="values__text">
-              <p>We believe in delivering superior returns for our investors, exceptional service to our clients, and ample growth opportunities for our employees.</p>
+              <p>We believe in delivering superior returns for our investors, exceptional service to our portfolio companies, and ample growth opportunities for our employees.</p>
             </div>
           </div>
           {valuesData.map((value, index) => (

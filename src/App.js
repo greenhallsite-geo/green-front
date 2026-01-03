@@ -20,6 +20,10 @@ import PortfolioPage from './components/PortfolioPage';
 import CompanyPage from './components/Company';
 import Login from './components/Login';
 import Placeholder from './components/Placeholder';
+import TeamPage from './components/TeamPage';
+import TeamMember from './components/TeamMember';
+import Services from './components/Services';
+import ContactForm from './components/ContactForm';
 
 // Home page component with all sections
 function Home() {
@@ -35,8 +39,8 @@ function Home() {
       <Team />
       <Value2 />
       <History />
+      <Services />
       <Responsibility />
-      <Title />
       <Partners />
     </>
   );
@@ -52,8 +56,11 @@ function App() {
           <Route path="/admin" element={<Admin />} />
           <Route path="/portfolio" element={<PortfolioPage />} />
           <Route path="/company" element={<CompanyPage />} />
+          <Route path="/team" element={<TeamPage />} />
           <Route path="/login" element={<Login />} />
           <Route path="/investor-portal" element={<Placeholder />} />
+          <Route path="/team-member" element={<TeamMember />} />
+          <Route path="/contact" element={<ContactForm />} />
         </Routes>
         <Footer />
       </div>

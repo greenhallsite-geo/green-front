@@ -32,14 +32,19 @@ const PORT = process.env.PORT || 5001;
 // 1. Team Members Schema
 const teamMemberSchema = new mongoose.Schema({
   name: { type: String, required: true, trim: true },
+  firstName: { type: String, required: false, trim: true },
+  lastName: { type: String, required: false, trim: true },
   imageUrl: { type: String, required: true },
   imagePublicId: { type: String, required: true },
-  role: { type: String, required: false, trim: true }, // Optional
-  position: { type: String, required: false, trim: true }, // Optional
-  team: { type: String, required: false, trim: true }, // Optional - e.g., "Investment Team", "Operations Team"
-  information: { type: String, required: false, trim: true }, // Optional - Bio/description
-  email: { type: String, required: false, trim: true }, // Optional
-  phone: { type: String, required: false, trim: true }, // Optional
+  position: { type: String, required: true, trim: true },
+  information: { type: String, required: true, trim: true },
+  team: { 
+    type: String, 
+    required: true, 
+    enum: ['AllInvestment Team', 'Operations Team', 'Advisory Board'],
+    trim: true 
+  },
+  order: { type: Number, default: 999 }, // Lower numbers appear first
   uploadDate: { type: Date, default: Date.now },
 }, { timestamps: true });
 
@@ -47,9 +52,9 @@ const teamMemberSchema = new mongoose.Schema({
 const newsSchema = new mongoose.Schema({
   title: { type: String, required: true, trim: true },
   newsDate: { type: Date, required: true },
-  content: { type: String, required: true, trim: true }, // Long text content
-  imageUrl: { type: String, required: false }, // Optional image
-  imagePublicId: { type: String, required: false }, // Optional
+  content: { type: String, required: true, trim: true },
+  imageUrl: { type: String, required: false },
+  imagePublicId: { type: String, required: false },
   uploadDate: { type: Date, default: Date.now },
 }, { timestamps: true });
 
@@ -58,13 +63,13 @@ const portfolioSchema = new mongoose.Schema({
   companyName: { type: String, required: true, trim: true },
   description: { type: String, required: true, trim: true },
   industry: { type: String, required: true, trim: true },
-  initialInvestment: { type: Date, required: true }, // Investment date
+  initialInvestment: { type: Date, required: true },
   headquarters: { type: String, required: true, trim: true },
   acquisitions: { type: Number, required: true, default: 0 },
-  status: { type: String, required: true, trim: true }, // e.g., "Realized (July 2022)", "Active"
-  fund: { type: String, required: true, trim: true }, // e.g., "Greenhall SPV"
-  logoUrl: { type: String, required: false }, // Optional company logo
-  logoPublicId: { type: String, required: false }, // Optional
+  status: { type: String, required: true, trim: true },
+  fund: { type: String, required: true, trim: true },
+  logoUrl: { type: String, required: false },
+  logoPublicId: { type: String, required: false },
   uploadDate: { type: Date, default: Date.now },
 }, { timestamps: true });
 
@@ -136,6 +141,7 @@ app.get("/", (req, res) => {
 
 // ========== TEAM MEMBERS ROUTES ==========
 
+// CREATE Team Member
 app.post("/team/upload", checkDbConnection, uploadImage.single("image"), async (req, res) => {
   console.log('👥 Team member upload request');
   
@@ -144,26 +150,46 @@ app.post("/team/upload", checkDbConnection, uploadImage.single("image"), async (
   }
 
   try {
-    const { name, role, position, team, information, email, phone } = req.body;
+    const { name, firstName, lastName, position, information, team, order } = req.body;
 
-    if (!name) {
-      return res.status(400).json({ error: "Name is required" });
+    if (!name && (!firstName || !lastName)) {
+      return res.status(400).json({ error: "Name or firstName and lastName are required" });
+    }
+
+    if (!position) {
+      return res.status(400).json({ error: "Position is required" });
+    }
+
+    if (!information) {
+      return res.status(400).json({ error: "Information/summary is required" });
+    }
+
+    if (!team) {
+      return res.status(400).json({ error: "Team is required" });
+    }
+
+    // Validate team value
+    const validTeams = ['AllInvestment Team', 'Operations Team', 'Advisory Board'];
+    if (!validTeams.includes(team)) {
+      return res.status(400).json({ 
+        error: "Invalid team value. Must be one of: 'AllInvestment Team', 'Operations Team', 'Advisory Board'" 
+      });
     }
 
     const newTeamMember = new TeamMember({
-      name: name.trim(),
+      name: name?.trim() || `${firstName?.trim()} ${lastName?.trim()}`,
+      firstName: firstName?.trim() || '',
+      lastName: lastName?.trim() || '',
       imageUrl: req.file.path,
       imagePublicId: req.file.filename,
-      role: role?.trim() || '',
-      position: position?.trim() || '',
-      team: team?.trim() || '',
-      information: information?.trim() || '',
-      email: email?.trim() || '',
-      phone: phone?.trim() || '',
+      position: position.trim(),
+      information: information.trim(),
+      team: team.trim(),
+      order: order ? parseInt(order) : 999, // Default to 999 if not provided
     });
 
     await newTeamMember.save();
-    console.log(`✅ Team member created: ${newTeamMember._id}`);
+    console.log(`✅ Team member created: ${newTeamMember._id} (Team: ${team}, Order: ${newTeamMember.order})`);
 
     res.status(201).json({
       message: "Team member created successfully!",
@@ -176,9 +202,21 @@ app.post("/team/upload", checkDbConnection, uploadImage.single("image"), async (
   }
 });
 
+// GET All Team Members (with optional team filter, sorted by order)
 app.get("/team", checkDbConnection, async (req, res) => {
   try {
-    const teamMembers = await TeamMember.find().sort({ uploadDate: -1 });
+    const { team } = req.query;
+    
+    let filter = {};
+    if (team) {
+      filter.team = team;
+    }
+    
+    // Sort by order (ascending), then by uploadDate (descending) as fallback
+    const teamMembers = await TeamMember.find(filter).sort({ order: 1, uploadDate: -1 });
+    
+    console.log(`📋 Fetched ${teamMembers.length} team members${team ? ` (Team: ${team})` : ''}`);
+    
     res.json({ teamMembers });
   } catch (error) {
     console.error('❌ Error fetching team members:', error);
@@ -186,6 +224,7 @@ app.get("/team", checkDbConnection, async (req, res) => {
   }
 });
 
+// GET Single Team Member
 app.get("/team/:id", checkDbConnection, async (req, res) => {
   try {
     const teamMember = await TeamMember.findById(req.params.id);
@@ -199,42 +238,66 @@ app.get("/team/:id", checkDbConnection, async (req, res) => {
   }
 });
 
+// EDIT Team Member (Full Update Support)
 app.put("/team/:id", checkDbConnection, uploadImage.single("image"), async (req, res) => {
+  console.log(`✏️ Editing team member: ${req.params.id}`);
+  
   try {
-    const { name, role, position, team, information, email, phone } = req.body;
+    const { name, firstName, lastName, position, information, team, order } = req.body;
     const teamMember = await TeamMember.findById(req.params.id);
 
     if (!teamMember) {
       return res.status(404).json({ error: "Team member not found" });
     }
 
-    // Update fields
-    if (name) teamMember.name = name.trim();
-    if (role !== undefined) teamMember.role = role.trim();
+    // Update text fields if provided
+    if (name !== undefined) teamMember.name = name.trim();
+    if (firstName !== undefined) teamMember.firstName = firstName.trim();
+    if (lastName !== undefined) teamMember.lastName = lastName.trim();
     if (position !== undefined) teamMember.position = position.trim();
-    if (team !== undefined) teamMember.team = team.trim();
     if (information !== undefined) teamMember.information = information.trim();
-    if (email !== undefined) teamMember.email = email.trim();
-    if (phone !== undefined) teamMember.phone = phone.trim();
+    
+    // Update team if provided
+    if (team !== undefined) {
+      const validTeams = ['AllInvestment Team', 'Operations Team', 'Advisory Board'];
+      if (!validTeams.includes(team)) {
+        return res.status(400).json({ 
+          error: "Invalid team value. Must be one of: 'AllInvestment Team', 'Operations Team', 'Advisory Board'" 
+        });
+      }
+      teamMember.team = team.trim();
+    }
+
+    // Update order if provided
+    if (order !== undefined) {
+      teamMember.order = parseInt(order);
+    }
 
     // Update image if new one is uploaded
     if (req.file) {
+      console.log('🖼️ Replacing team member image');
       await safeCloudinaryDestroy(teamMember.imagePublicId);
       teamMember.imageUrl = req.file.path;
       teamMember.imagePublicId = req.file.filename;
     }
 
     await teamMember.save();
-    console.log(`✅ Team member updated: ${req.params.id}`);
+    console.log(`✅ Team member updated: ${req.params.id} (Team: ${teamMember.team}, Order: ${teamMember.order})`);
 
-    res.json({ message: "Team member updated successfully", teamMember });
+    res.json({ 
+      message: "Team member updated successfully", 
+      teamMember 
+    });
   } catch (error) {
     console.error('❌ Error updating team member:', error);
-    res.status(500).json({ error: "Failed to update team member" });
+    res.status(500).json({ error: "Failed to update team member", details: error.message });
   }
 });
 
+// DELETE Team Member
 app.delete("/team/:id", checkDbConnection, async (req, res) => {
+  console.log(`🗑️ Deleting team member: ${req.params.id}`);
+  
   try {
     const teamMember = await TeamMember.findById(req.params.id);
     if (!teamMember) {
@@ -254,6 +317,7 @@ app.delete("/team/:id", checkDbConnection, async (req, res) => {
 
 // ========== NEWS ROUTES ==========
 
+// CREATE News
 app.post("/news/upload", checkDbConnection, uploadImage.single("image"), async (req, res) => {
   console.log('📰 News upload request');
   
@@ -264,7 +328,6 @@ app.post("/news/upload", checkDbConnection, uploadImage.single("image"), async (
       return res.status(400).json({ error: "Title, news date, and content are required" });
     }
 
-    // Handle optional image
     let imageUrl = null;
     let imagePublicId = null;
 
@@ -272,8 +335,6 @@ app.post("/news/upload", checkDbConnection, uploadImage.single("image"), async (
       imageUrl = req.file.path;
       imagePublicId = req.file.filename;
       console.log('📷 Image uploaded for news');
-    } else {
-      console.log('📝 News created without image');
     }
 
     const newNews = new News({
@@ -298,6 +359,7 @@ app.post("/news/upload", checkDbConnection, uploadImage.single("image"), async (
   }
 });
 
+// GET All News
 app.get("/news", checkDbConnection, async (req, res) => {
   try {
     const news = await News.find().sort({ newsDate: -1 });
@@ -308,6 +370,7 @@ app.get("/news", checkDbConnection, async (req, res) => {
   }
 });
 
+// GET Single News
 app.get("/news/:id", checkDbConnection, async (req, res) => {
   try {
     const news = await News.findById(req.params.id);
@@ -321,7 +384,10 @@ app.get("/news/:id", checkDbConnection, async (req, res) => {
   }
 });
 
+// EDIT News (Full Update Support)
 app.put("/news/:id", checkDbConnection, uploadImage.single("image"), async (req, res) => {
+  console.log(`✏️ Editing news: ${req.params.id}`);
+  
   try {
     const { title, newsDate, content } = req.body;
     const news = await News.findById(req.params.id);
@@ -330,13 +396,14 @@ app.put("/news/:id", checkDbConnection, uploadImage.single("image"), async (req,
       return res.status(404).json({ error: "News not found" });
     }
 
-    // Update fields
-    if (title) news.title = title.trim();
-    if (newsDate) news.newsDate = new Date(newsDate);
-    if (content) news.content = content.trim();
+    // Update text fields if provided
+    if (title !== undefined) news.title = title.trim();
+    if (newsDate !== undefined) news.newsDate = new Date(newsDate);
+    if (content !== undefined) news.content = content.trim();
 
     // Update image if new one is uploaded
     if (req.file) {
+      console.log('🖼️ Replacing news image');
       if (news.imagePublicId) {
         await safeCloudinaryDestroy(news.imagePublicId);
       }
@@ -347,21 +414,26 @@ app.put("/news/:id", checkDbConnection, uploadImage.single("image"), async (req,
     await news.save();
     console.log(`✅ News updated: ${req.params.id}`);
 
-    res.json({ message: "News updated successfully", news });
+    res.json({ 
+      message: "News updated successfully", 
+      news 
+    });
   } catch (error) {
     console.error('❌ Error updating news:', error);
-    res.status(500).json({ error: "Failed to update news" });
+    res.status(500).json({ error: "Failed to update news", details: error.message });
   }
 });
 
+// DELETE News
 app.delete("/news/:id", checkDbConnection, async (req, res) => {
+  console.log(`🗑️ Deleting news: ${req.params.id}`);
+  
   try {
     const news = await News.findById(req.params.id);
     if (!news) {
       return res.status(404).json({ error: "News not found" });
     }
 
-    // Only delete from Cloudinary if image exists
     if (news.imagePublicId) {
       await safeCloudinaryDestroy(news.imagePublicId);
     }
@@ -378,6 +450,7 @@ app.delete("/news/:id", checkDbConnection, async (req, res) => {
 
 // ========== PORTFOLIO ROUTES ==========
 
+// CREATE Portfolio Company
 app.post("/portfolio", checkDbConnection, uploadImage.single("logo"), async (req, res) => {
   console.log('💼 Portfolio company create request');
   
@@ -400,7 +473,6 @@ app.post("/portfolio", checkDbConnection, uploadImage.single("logo"), async (req
       });
     }
 
-    // Handle optional logo
     let logoUrl = null;
     let logoPublicId = null;
 
@@ -408,8 +480,6 @@ app.post("/portfolio", checkDbConnection, uploadImage.single("logo"), async (req
       logoUrl = req.file.path;
       logoPublicId = req.file.filename;
       console.log('🏢 Logo uploaded for portfolio company');
-    } else {
-      console.log('📝 Portfolio company created without logo');
     }
 
     const newPortfolio = new Portfolio({
@@ -439,6 +509,7 @@ app.post("/portfolio", checkDbConnection, uploadImage.single("logo"), async (req
   }
 });
 
+// GET All Portfolio Companies
 app.get("/portfolio", checkDbConnection, async (req, res) => {
   try {
     const portfolio = await Portfolio.find().sort({ initialInvestment: -1 });
@@ -449,6 +520,7 @@ app.get("/portfolio", checkDbConnection, async (req, res) => {
   }
 });
 
+// GET Single Portfolio Company
 app.get("/portfolio/:id", checkDbConnection, async (req, res) => {
   try {
     const portfolio = await Portfolio.findById(req.params.id);
@@ -462,7 +534,10 @@ app.get("/portfolio/:id", checkDbConnection, async (req, res) => {
   }
 });
 
+// EDIT Portfolio Company (Full Update Support)
 app.put("/portfolio/:id", checkDbConnection, uploadImage.single("logo"), async (req, res) => {
+  console.log(`✏️ Editing portfolio company: ${req.params.id}`);
+  
   try {
     const { 
       companyName, 
@@ -481,18 +556,19 @@ app.put("/portfolio/:id", checkDbConnection, uploadImage.single("logo"), async (
       return res.status(404).json({ error: "Portfolio company not found" });
     }
 
-    // Update fields
-    if (companyName) portfolio.companyName = companyName.trim();
-    if (description) portfolio.description = description.trim();
-    if (industry) portfolio.industry = industry.trim();
-    if (initialInvestment) portfolio.initialInvestment = new Date(initialInvestment);
-    if (headquarters) portfolio.headquarters = headquarters.trim();
+    // Update text fields if provided
+    if (companyName !== undefined) portfolio.companyName = companyName.trim();
+    if (description !== undefined) portfolio.description = description.trim();
+    if (industry !== undefined) portfolio.industry = industry.trim();
+    if (initialInvestment !== undefined) portfolio.initialInvestment = new Date(initialInvestment);
+    if (headquarters !== undefined) portfolio.headquarters = headquarters.trim();
     if (acquisitions !== undefined) portfolio.acquisitions = parseInt(acquisitions);
-    if (status) portfolio.status = status.trim();
-    if (fund) portfolio.fund = fund.trim();
+    if (status !== undefined) portfolio.status = status.trim();
+    if (fund !== undefined) portfolio.fund = fund.trim();
 
     // Update logo if new one is uploaded
     if (req.file) {
+      console.log('🖼️ Replacing portfolio logo');
       if (portfolio.logoPublicId) {
         await safeCloudinaryDestroy(portfolio.logoPublicId);
       }
@@ -503,27 +579,33 @@ app.put("/portfolio/:id", checkDbConnection, uploadImage.single("logo"), async (
     await portfolio.save();
     console.log(`✅ Portfolio company updated: ${req.params.id}`);
 
-    res.json({ message: "Portfolio company updated successfully", portfolio });
+    res.json({ 
+      message: "Portfolio company updated successfully", 
+      portfolio 
+    });
   } catch (error) {
     console.error('❌ Error updating portfolio company:', error);
-    res.status(500).json({ error: "Failed to update portfolio company" });
+    res.status(500).json({ error: "Failed to update portfolio company", details: error.message });
   }
 });
 
+// DELETE Portfolio Company
 app.delete("/portfolio/:id", checkDbConnection, async (req, res) => {
+  console.log(`🗑️ Deleting portfolio company: ${req.params.id}`);
+  
   try {
     const portfolio = await Portfolio.findById(req.params.id);
     if (!portfolio) {
       return res.status(404).json({ error: "Portfolio company not found" });
     }
 
-    // Only delete from Cloudinary if logo exists
     if (portfolio.logoPublicId) {
       await safeCloudinaryDestroy(portfolio.logoPublicId);
     }
 
     await Portfolio.findByIdAndDelete(req.params.id);
     console.log(`✅ Portfolio company deleted: ${req.params.id}`);
+    
     res.json({ message: "Portfolio company deleted successfully" });
   } catch (error) {
     console.error('❌ Error deleting portfolio company:', error);
@@ -552,9 +634,12 @@ const server = app.listen(PORT, () => {
   console.log(`\n🚀 Greenhall Capital Server Running!`);
   console.log(`🌐 Server listening on port ${PORT}`);
   console.log(`\n📋 Endpoints:`);
-  console.log(' Team Members: POST/GET/PUT/DELETE /team');
-  console.log(' News: POST/GET/PUT/DELETE /news (image optional)');
-  console.log(' Portfolio: POST/GET/PUT/DELETE /portfolio');
+  console.log(' ✅ Team Members: POST/GET/PUT/DELETE /team (Filter by ?team=value)');
+  console.log('    Valid teams: AllInvestment Team, Operations Team, Advisory Board');
+  console.log('    🔢 Supports order field - lower numbers appear first');
+  console.log(' ✅ News: POST/GET/PUT/DELETE /news');
+  console.log(' ✅ Portfolio: POST/GET/PUT/DELETE /portfolio');
+  console.log('\n✏️  All resources support full EDIT functionality via PUT');
   
   mongoose.connect(MONGODB_URI)
   .then(() => {
@@ -592,4 +677,4 @@ const shutdown = async () => {
 };
 
 process.on('SIGINT', shutdown);
-process.on('SIGTERM', shutdown)
+process.on('SIGTERM', shutdown);

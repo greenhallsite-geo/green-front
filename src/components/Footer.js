@@ -29,6 +29,13 @@ function Footer() {
       return;
     }
     
+    // Handle Contact page navigation
+    if (href === '/contact') {
+      navigate('/contact');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+    
     // Handle Terms and Privacy pages
     if (href === '/terms-of-service' || href === '/privacy-policy') {
       navigate(href);
@@ -71,10 +78,10 @@ function Footer() {
                 Connect with Greenhall
               </h2>
               <div className="footer__links">
-                <a href="mailto:info.dc@greenhallcapital.com" className="footer__email anim-text _anim-items _active">
-                  <span>info.dc@greenhallcapital.com</span>
+                <a href="mailto:info@greenhallcapital.com" className="footer__email anim-text _anim-items _active">
+                  <span> info@greenhallcapital.com</span>
                 </a>
-                <a href="https://www.linkedin.com/company/greenhall-capital/" className="footer__socials anim-text _anim-items _active" target="_blank" rel="noopener noreferrer">
+                <a href="https://www.linkedin.com/company/greenhall-capital-partners/?viewAsMember=true" className="footer__socials anim-text _anim-items _active" target="_blank" rel="noopener noreferrer">
                   <img src="https://durationcapitalpartners.com/wp-content/uploads/2024/07/linkedin-2.svg" alt="linkedin" title="linkedin" />
                   <span className="footer__socials-text">LinkedIn</span>
                 </a>
@@ -92,7 +99,7 @@ function Footer() {
                 </a>
                 <a href="https://maps.google.com/?q=1230+Rosecrans+Avenue+Suite+610+Manhattan+Beach+CA+90266" className="footer__address-link" target="_blank" rel="noopener noreferrer">
                   <h3 className="footer__address-city anim-text _anim-items _active">
-                    Los Angeles
+                    Los Angeles, CA
                   </h3>
                   <div className="footer__address-all anim-text _anim-items _active">
                     <p>1230 Rosecrans Avenue, Suite 610<br />
@@ -150,7 +157,7 @@ function Footer() {
                 <li className="menu-item"><a href="/portfolio" onClick={(e) => handleNavClick(e, '/portfolio')}>Portfolio</a></li>
                 <li className="menu-item"><a href="/#team" onClick={(e) => handleNavClick(e, '/#team')}>Team</a></li>
                 <li className="menu-item"><a href="/#responsibility" onClick={(e) => handleNavClick(e, '/#responsibility')}>Responsibility</a></li>
-                <li className="menu-item"><a href="#contacts" onClick={(e) => handleNavClick(e, '#contacts')}>Contact</a></li>
+                <li className="menu-item"><a href="/contact" onClick={(e) => handleNavClick(e, '/contact')}>Contact</a></li>
               </ul>
             </nav>
             <div className="footer__additional">

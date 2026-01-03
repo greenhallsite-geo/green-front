@@ -14,14 +14,21 @@ function Why() {
             </div>
             
            <div className="why-text">
-  <p>Our firm is committed to delivering healthy returns on invested capital and providing unique solutions to the challenges our clients face.</p>
-  <p>We understand that trust is paramount in our industry, and we work diligently to earn and maintain that trust by delivering results and exceeding expectations.</p>
+  <p>Our firm is grounded in a differentiated investment mandate—combining a top-down,
+thesis-driven approach with direct, proactive bottom-up sourcing and an operationally
+focused buy-and-build strategy. This integrated model enables us to identify high-
+conviction themes, originate proprietary opportunities, and create value through
+disciplined execution.</p>
+  <p>We recognize that trust is the foundation of every successful partnership. Greenhall
+Capital is committed to earning and upholding that trust by operating with integrity,
+maintaining transparency, and consistently delivering results that meet or exceed
+expectations.</p>
 </div>
           </div>
           
           <div className="why-visual">
             <img src={weldingImage} alt="Why We Do It" />
-          </div>
+          </div>  
         </div>
       </div>
     </section>

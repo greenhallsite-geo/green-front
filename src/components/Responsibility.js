@@ -13,13 +13,32 @@ function Responsibility() {
           <div className="four-blocks__cards">
             <div className="four-blocks__content">
               <h2 className="four-blocks__title section-title anim-text _anim-items _active">
-                Partnering for Growth and Value Creation
+               Partnering for Growth and Value Creation
               </h2>
               <div className="four-blocks__text anim-text _anim-items _active">
                 <div className="four-blocks__text-left">
                   <p>
-                    Greenhall Capital Partners is committed to working closely with management teams to execute strategic plans that drive growth and success. Our approach involves identifying and optimizing core competencies by leveraging our deep industry knowledge and extensive experience across business cycles.
+                   We are proud to be a signatory of the Institutional Limited Partners Association
+(ILPA) Diversity in Action Initiative, which promotes greater diversity and inclusion
+across the investment ecosystem and encourages the adoption of concrete,
+measurable DE&amp;I practices. Greenhall Capital is also a member of the National
+Association of Investment Companies (NAIC) Diverse Asset Managers Program, the
+industry’s largest association representing diverse-owned alternative investment firms.
                   </p>
+
+                   <p className="title_text__text anim-text _anim-items _active">
+  These affiliations reflect our commitment to responsible stewardship, inclusive
+  leadership, and continuous improvement across our organization.
+  For more information on our ESG policy, please visit:{' '}
+  <a 
+    href="https://www.greenhallcapital.com/esg-policy" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    style={{ color: '#007bff', textDecoration: 'underline' }}
+  >
+    https://www.greenhallcapital.com/esg-policy
+  </a>
+</p>
                 </div>
               </div>
             </div>

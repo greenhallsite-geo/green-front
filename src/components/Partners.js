@@ -1,6 +1,9 @@
 import React from 'react'
 import '../styles/Partners.css'
 
+const logo = `${process.env.PUBLIC_URL}/tlogo1.png`;
+const logo2 = `${process.env.PUBLIC_URL}/tlogo2.png`;
+
 function Partners() {
   return (
     <div className="our-partners">
@@ -16,7 +19,7 @@ function Partners() {
                 <img 
                   width="351" 
                   height="66" 
-                  src="https://durationcapitalpartners.com/wp-content/uploads/2024/06/Principles_for_Respo.svg" 
+                  src={logo} 
                   className="attachment-full size-full" 
                   alt="Principles for Respo" 
                   title="Principles for Respo" 
@@ -30,7 +33,7 @@ function Partners() {
                 <img 
                   width="228" 
                   height="163" 
-                  src="https://durationcapitalpartners.com/wp-content/uploads/2024/06/gresb-infrastructure.svg" 
+                  src={logo2} 
                   className="attachment-full size-full" 
                   alt="gresb infrastructure" 
                   title="gresb infrastructure" 

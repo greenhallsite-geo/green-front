@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/PortfolioPage.css';
 import Header from './Header';
 
+const back = `${process.env.PUBLIC_URL}/p.png`;
 
 function PortfolioPage() {
   const [portfolioItems, setPortfolioItems] = useState([]);
@@ -13,6 +14,11 @@ function PortfolioPage() {
 
   const navigate = useNavigate();
   const API_BASE_URL = "https://green-back-wgz9.onrender.com";
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   // Fetch portfolio items from backend
   useEffect(() => {
@@ -87,7 +93,7 @@ function PortfolioPage() {
           </div>
           <div className="hero-portfolio__right">
             <img 
-              src="https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1200&q=80" 
+              src={back} 
               alt="Portfolio"
               className="hero-portfolio__image"
             />
@@ -103,24 +109,32 @@ function PortfolioPage() {
               <button 
                 className={`filter-button ${sectorFilter === 'all' ? 'active' : ''}`}
                 onClick={() => handleSectorFilter('all')}
+                disabled={loading}
+                style={{ opacity: loading ? 0.6 : 1, pointerEvents: loading ? 'none' : 'auto' }}
               >
                 All
               </button>
               <button 
                 className={`filter-button ${sectorFilter === 'business' ? 'active' : ''}`}
                 onClick={() => handleSectorFilter('business')}
+                disabled={loading}
+                style={{ opacity: loading ? 0.6 : 1, pointerEvents: loading ? 'none' : 'auto' }}
               >
                 Business Services
               </button>
               <button 
                 className={`filter-button ${sectorFilter === 'industrials' ? 'active' : ''}`}
                 onClick={() => handleSectorFilter('industrials')}
+                disabled={loading}
+                style={{ opacity: loading ? 0.6 : 1, pointerEvents: loading ? 'none' : 'auto' }}
               >
                 Industrials
               </button>
               <button 
                 className={`filter-button ${sectorFilter === 'tech' ? 'active' : ''}`}
                 onClick={() => handleSectorFilter('tech')}
+                disabled={loading}
+                style={{ opacity: loading ? 0.6 : 1, pointerEvents: loading ? 'none' : 'auto' }}
               >
                 Technology / Telecommunications
               </button>
@@ -128,8 +142,16 @@ function PortfolioPage() {
 
             {/* Portfolio Grid */}
             {loading ? (
-              <div className="portfolio-loading">
-                <p>Loading portfolio companies...</p>
+              <div className="portfolio-skeleton-grid">
+                {[...Array(8)].map((_, index) => (
+                  <div key={index} className="portfolio-skeleton-card">
+                    <div className="portfolio-skeleton-card__image" />
+                    <div className="portfolio-skeleton-card__info">
+                      <div className="portfolio-skeleton-card__name" />
+                      <div className="portfolio-skeleton-card__arrow" />
+                    </div>
+                  </div>
+                ))}
               </div>
             ) : (
               <>

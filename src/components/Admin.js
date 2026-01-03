@@ -8,12 +8,12 @@ function Admin() {
   
   // Team Member fields
   const [name, setName] = useState("");
-  const [role, setRole] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [position, setPosition] = useState("");
-  const [team, setTeam] = useState("");
   const [information, setInformation] = useState("");
-  const [email, setEmail] = useState("");
-  const [phone, setPhone] = useState("");
+  const [team, setTeam] = useState("AllInvestment Team");
+  const [order, setOrder] = useState("");
   
   // News fields
   const [title, setTitle] = useState("");
@@ -34,6 +34,10 @@ function Admin() {
   const [isUploading, setIsUploading] = useState(false);
   const [items, setItems] = useState([]);
   const [stats, setStats] = useState({});
+  
+  // Edit mode state
+  const [editingItemId, setEditingItemId] = useState(null);
+  const [isEditing, setIsEditing] = useState(false);
 
   const API_BASE_URL = "https://green-back-wgz9.onrender.com";
 
@@ -52,14 +56,25 @@ function Admin() {
     const newSection = e.target.value;
     setSection(newSection);
     
-    // Clear all fields
+    // Clear all fields and exit edit mode
+    clearForm();
+    cancelEdit();
+    
+    const fileInput = document.querySelector('input[type="file"]');
+    if (fileInput) {
+      fileInput.value = '';
+    }
+  };
+
+  // --- Clear Form Helper ---
+  const clearForm = () => {
     setName("");
-    setRole("");
+    setFirstName("");
+    setLastName("");
     setPosition("");
-    setTeam("");
     setInformation("");
-    setEmail("");
-    setPhone("");
+    setTeam("AllInvestment Team");
+    setOrder("");
     setTitle("");
     setNewsDate("");
     setContent("");
@@ -87,6 +102,9 @@ function Admin() {
         return { 
           requiresImage: true,
           requiresName: true,
+          requiresPosition: true,
+          requiresInformation: true,
+          requiresTeam: true,
           imageLabel: "Team Member Photo"
         };
       case "news":
@@ -116,18 +134,70 @@ function Admin() {
     }
   }, [section]);
 
-  // --- File Upload Logic ---
+  // --- Edit Mode Functions ---
+  const startEdit = (item) => {
+    setIsEditing(true);
+    setEditingItemId(item._id);
+    
+    if (section === "team") {
+      setName(item.name || "");
+      setFirstName(item.firstName || "");
+      setLastName(item.lastName || "");
+      setPosition(item.position || "");
+      setInformation(item.information || "");
+      setTeam(item.team || "AllInvestment Team");
+      setOrder(item.order !== undefined ? item.order : "");
+    } else if (section === "news") {
+      setTitle(item.title || "");
+      setNewsDate(item.newsDate ? new Date(item.newsDate).toISOString().split('T')[0] : "");
+      setContent(item.content || "");
+    } else if (section === "portfolio") {
+      setCompanyName(item.companyName || "");
+      setDescription(item.description || "");
+      setIndustry(item.industry || "");
+      setInitialInvestment(item.initialInvestment ? new Date(item.initialInvestment).toISOString().split('T')[0] : "");
+      setHeadquarters(item.headquarters || "");
+      setAcquisitions(item.acquisitions || 0);
+      setStatus(item.status || "");
+      setFund(item.fund || "");
+    }
+    
+    setMessage(`✏️ Editing mode active. Modify fields and click "Update" to save changes.`);
+    
+    // Scroll to form
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const cancelEdit = () => {
+    setIsEditing(false);
+    setEditingItemId(null);
+    clearForm();
+  };
+
+  // --- File Upload/Update Logic ---
   const handleUpload = async () => {
     const fieldInfo = getFieldInfo();
 
     // Validation based on section
     if (section === "team") {
-      if (!files || files.length === 0) {
+      if (!isEditing && (!files || files.length === 0)) {
         setMessage("❌ Please select a team member photo!");
         return;
       }
-      if (!name.trim()) {
-        setMessage("❌ Please enter the team member name");
+      if (!name.trim() && (!firstName.trim() || !lastName.trim())) {
+        setMessage("❌ Please enter the team member name or first/last name");
+        return;
+      }
+      if (!position.trim()) {
+        setMessage("❌ Please enter the team member position");
+        return;
+      }
+      if (!information.trim()) {
+        setMessage("❌ Please enter the team member bio/information");
+        return;
+      }
+      if (!team.trim()) {
+        setMessage("❌ Please select a team");
         return;
       }
     }
@@ -191,42 +261,66 @@ function Admin() {
       }
     }
 
-    // Prepare Upload
+    // Prepare Upload/Update
     setIsUploading(true);
-    setMessage("⏳ Uploading...");
+    setMessage(isEditing ? "⏳ Updating..." : "⏳ Uploading...");
     
     try {
       let endpoint;
       let requestBody;
-      let method = "POST";
+      let method = isEditing ? "PUT" : "POST";
       let isFormData = false;
 
       if (section === "team") {
-        endpoint = `${API_BASE_URL}/team/upload`;
+        endpoint = isEditing 
+          ? `${API_BASE_URL}/team/${editingItemId}`
+          : `${API_BASE_URL}/team/upload`;
+        
         const formData = new FormData();
-        formData.append("image", files[0]);
-        formData.append("name", name.trim());
-        if (role.trim()) formData.append("role", role.trim());
-        if (position.trim()) formData.append("position", position.trim());
-        if (team.trim()) formData.append("team", team.trim());
-        if (information.trim()) formData.append("information", information.trim());
-        if (email.trim()) formData.append("email", email.trim());
-        if (phone.trim()) formData.append("phone", phone.trim());
+        
+        if (name.trim()) {
+          formData.append("name", name.trim());
+        } else {
+          formData.append("firstName", firstName.trim());
+          formData.append("lastName", lastName.trim());
+          formData.append("name", `${firstName.trim()} ${lastName.trim()}`);
+        }
+        
+        formData.append("position", position.trim());
+        formData.append("information", information.trim());
+        formData.append("team", team.trim());
+        
+        if (order !== "") {
+          formData.append("order", parseInt(order));
+        }
+        
+        if (files && files.length > 0) {
+          formData.append("image", files[0]);
+        }
+        
         requestBody = formData;
         isFormData = true;
       } else if (section === "news") {
-        endpoint = `${API_BASE_URL}/news/upload`;
+        endpoint = isEditing 
+          ? `${API_BASE_URL}/news/${editingItemId}`
+          : `${API_BASE_URL}/news/upload`;
+        
         const formData = new FormData();
         formData.append("title", title.trim());
         formData.append("newsDate", newsDate.trim());
         formData.append("content", content.trim());
+        
         if (files && files.length > 0) {
           formData.append("image", files[0]);
         }
+        
         requestBody = formData;
         isFormData = true;
       } else if (section === "portfolio") {
-        endpoint = `${API_BASE_URL}/portfolio`;
+        endpoint = isEditing 
+          ? `${API_BASE_URL}/portfolio/${editingItemId}`
+          : `${API_BASE_URL}/portfolio`;
+        
         const formData = new FormData();
         formData.append("companyName", companyName.trim());
         formData.append("description", description.trim());
@@ -236,9 +330,11 @@ function Admin() {
         formData.append("acquisitions", parseInt(acquisitions));
         formData.append("status", status.trim());
         formData.append("fund", fund.trim());
+        
         if (files && files.length > 0) {
           formData.append("logo", files[0]);
         }
+        
         requestBody = formData;
         isFormData = true;
       }
@@ -259,49 +355,40 @@ function Admin() {
       const data = await res.json();
 
       if (res.ok) {
-        setMessage(`✅ Upload successful! Item saved in "${section}" section.`);
-        
-        // Add new item to list
-        const newItem = data.teamMember || data.news || data.portfolio;
-        if (newItem) {
-          setItems(prevItems => [newItem, ...prevItems]);
+        if (isEditing) {
+          setMessage(`✅ Update successful! Item updated in "${section}" section.`);
+          
+          // Update item in list
+          const updatedItem = data.teamMember || data.news || data.portfolio;
+          if (updatedItem) {
+            setItems(prevItems =>
+              prevItems.map(item => item._id === editingItemId ? updatedItem : item)
+            );
+          }
+          
+          cancelEdit();
+        } else {
+          setMessage(`✅ Upload successful! Item saved in "${section}" section.`);
+          
+          // Add new item to list
+          const newItem = data.teamMember || data.news || data.portfolio;
+          if (newItem) {
+            setItems(prevItems => [newItem, ...prevItems]);
+          }
         }
 
         // Clear form fields
-        setFiles([]);
-        setName("");
-        setRole("");
-        setPosition("");
-        setTeam("");
-        setInformation("");
-        setEmail("");
-        setPhone("");
-        setTitle("");
-        setNewsDate("");
-        setContent("");
-        setCompanyName("");
-        setDescription("");
-        setIndustry("");
-        setInitialInvestment("");
-        setHeadquarters("");
-        setAcquisitions(0);
-        setStatus("");
-        setFund("");
-        
-        const fileInput = document.querySelector('input[type="file"]');
-        if (fileInput) {
-          fileInput.value = '';
-        }
+        clearForm();
 
         // Refresh stats and items
         loadItems();
         loadStats();
       } else {
-        setMessage(`❌ Upload failed: ${data.error || "Unknown error"}`);
+        setMessage(`❌ ${isEditing ? 'Update' : 'Upload'} failed: ${data.error || "Unknown error"}`);
       }
     } catch (err) {
-      console.error("Upload error:", err);
-      setMessage("❌ Upload failed: Network error. Make sure the server is running.");
+      console.error(`${isEditing ? 'Update' : 'Upload'} error:`, err);
+      setMessage(`❌ ${isEditing ? 'Update' : 'Upload'} failed: Network error. Make sure the server is running.`);
     } finally {
       setIsUploading(false);
     }
@@ -320,8 +407,11 @@ function Admin() {
       }
       const data = await res.json();
       
-      // Extract items based on section
-      const itemsArray = data.teamMembers || data.news || data.portfolio || [];
+      let itemsArray = data.teamMembers || data.news || data.portfolio || [];
+      
+      // For team members, items are already sorted by order from backend (ascending: 1, 2, 3...)
+      // No need to re-sort, backend already handles it
+      
       setItems(itemsArray);
     } catch (err) {
       console.error("Error loading items:", err);
@@ -332,7 +422,7 @@ function Admin() {
   // --- Fetching Upload Statistics ---
   const loadStats = useCallback(async () => {
     try {
-      const sections = ["team", "news", "portfolio"];
+      const sections = ["team", "portfolio"];
       const newStats = {};
       
       for (const sec of sections) {
@@ -370,6 +460,12 @@ function Admin() {
         setItems(prevItems =>
           prevItems.filter(item => item._id !== itemId)
         );
+        
+        // If we were editing this item, cancel edit mode
+        if (editingItemId === itemId) {
+          cancelEdit();
+        }
+        
         loadStats();
       } else {
         setMessage(`❌ Delete failed: ${data.error || "Unknown error"}`);
@@ -422,18 +518,28 @@ function Admin() {
 
       {/* Upload Form */}
       <div className="upload-form">
-        <h3 className="form-title">📤 Add New Item</h3>
+        <h3 className="form-title">
+          {isEditing ? '✏️ Edit Item' : '📤 Add New Item'}
+        </h3>
+        
+        {isEditing && (
+          <div className="edit-mode-banner">
+            <p>✏️ Editing mode active - Make changes and click "Update"</p>
+            <button onClick={cancelEdit} className="cancel-edit-button">
+              ❌ Cancel Edit
+            </button>
+          </div>
+        )}
         
         <div className="form-group">
           <label className="form-label">Section:</label>
           <select
             value={section}
             onChange={handleSectionChange}
-            disabled={isUploading}
+            disabled={isUploading || isEditing}
             className="form-select"
           >
             <option value="team">👥 Team Members</option>
-            <option value="news">📰 News</option>
             <option value="portfolio">💼 Portfolio</option>
           </select>
         </div>
@@ -442,91 +548,113 @@ function Admin() {
         {section === "team" && (
           <>
             <div className="form-group">
-              <label className="form-label">Name * :</label>
+              <label className="form-label">Full Name * :</label>
               <input
                 type="text"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
-                placeholder="Enter team member name"
+                className="form-input2"
+                placeholder="Enter full name (e.g., John Doe)"
                 maxLength={100}
               />
+              <small className="form-hint">
+                💡 Or use First Name + Last Name fields below
+              </small>
             </div>
-            <div className="form-group">
-              <label className="form-label">Role (Optional):</label>
-              <input
-                type="text"
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-                disabled={isUploading}
-                className="form-input"
-                placeholder="e.g., Managing Partner"
-                maxLength={100}
-              />
+            
+            <div className="form-row">
+              <div className="form-group">
+                <label className="form-label">First Name:</label>
+                <input
+                  type="text"
+                  value={firstName}
+                  onChange={(e) => setFirstName(e.target.value)}
+                  disabled={isUploading}
+                  className="form-input2"
+                  placeholder="First name"
+                  maxLength={50}
+                />
+              </div>
+              <div className="form-group">
+                <label className="form-label">Last Name:</label>
+                <input
+                  type="text"
+                  value={lastName}
+                  onChange={(e) => setLastName(e.target.value)}
+                  disabled={isUploading}
+                  className="form-input2"
+                  placeholder="Last name"
+                  maxLength={50}
+                />
+              </div>
             </div>
+
             <div className="form-group">
-              <label className="form-label">Position (Optional):</label>
+              <label className="form-label">Position/Title * :</label>
               <input
                 type="text"
                 value={position}
                 onChange={(e) => setPosition(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="e.g., Chief Investment Officer"
                 maxLength={100}
               />
+              <small className="form-hint">
+                💡 Will be displayed in CAPS
+              </small>
             </div>
+
             <div className="form-group">
-              <label className="form-label">Team (Optional):</label>
-              <input
-                type="text"
-                value={team}
-                onChange={(e) => setTeam(e.target.value)}
-                disabled={isUploading}
-                className="form-input"
-                placeholder="e.g., Investment Team"
-                maxLength={100}
-              />
-            </div>
-            <div className="form-group">
-              <label className="form-label">Bio/Information (Optional):</label>
+              <label className="form-label">Summary/Bio * :</label>
               <textarea
                 value={information}
                 onChange={(e) => setInformation(e.target.value)}
                 disabled={isUploading}
                 className="form-textarea"
-                placeholder="Enter team member bio or additional information"
+                placeholder="Enter summary of position and biography"
                 maxLength={5000}
-                style={{ minHeight: '120px' }}
               />
             </div>
+
             <div className="form-group">
-              <label className="form-label">Email (Optional):</label>
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
+              <label className="form-label">Team * :</label>
+              <select
+                value={team}
+                onChange={(e) => setTeam(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
-                placeholder="e.g., john.doe@greenhallcapital.com"
-                maxLength={100}
-              />
+                className="form-select"
+              >
+                <option value="AllInvestment Team">Investment Team</option>
+                <option value="Operations Team">Operations Team</option>
+                <option value="Advisory Board">Advisory Board</option>
+              </select>
+              <small className="form-hint">
+                💡 Select which team this member belongs to
+              </small>
             </div>
+
             <div className="form-group">
-              <label className="form-label">Phone (Optional):</label>
+              <label className="form-label">Display Order:</label>
               <input
-                type="tel"
-                value={phone}
-                onChange={(e) => setPhone(e.target.value)}
+                type="number"
+                value={order}
+                onChange={(e) => setOrder(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
-                placeholder="e.g., +1 (202) 765-3077"
-                maxLength={50}
+                className="form-input2"
+                placeholder="e.g., 1, 2, 3... (lower numbers appear first)"
+                min="0"
               />
+              <small className="form-hint">
+                💡 Lower numbers appear first (leave empty for default order)
+              </small>
             </div>
+
             <div className="form-group">
-              <label className="form-label">{fieldInfo.imageLabel} * :</label>
+              <label className="form-label">
+                {fieldInfo.imageLabel} {isEditing ? '(Optional - leave empty to keep current)' : '*'} :
+              </label>
               <input
                 type="file"
                 accept="image/*"
@@ -534,6 +662,11 @@ function Admin() {
                 disabled={isUploading}
                 className="form-file-input"
               />
+              {isEditing && (
+                <small className="form-hint">
+                  💡 Upload a new image to replace the existing one
+                </small>
+              )}
             </div>
           </>
         )}
@@ -548,7 +681,7 @@ function Admin() {
                 value={title}
                 onChange={(e) => setTitle(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="Enter news title"
                 maxLength={200}
               />
@@ -560,7 +693,7 @@ function Admin() {
                 value={newsDate}
                 onChange={(e) => setNewsDate(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
               />
             </div>
             <div className="form-group">
@@ -572,7 +705,6 @@ function Admin() {
                 className="form-textarea"
                 placeholder="Enter news content (can be long)"
                 maxLength={50000}
-                style={{ minHeight: '200px' }}
               />
             </div>
             <div className="form-group">
@@ -584,7 +716,7 @@ function Admin() {
                 disabled={isUploading}
                 className="form-file-input"
               />
-              <small style={{ color: '#666', display: 'block', marginTop: '5px' }}>
+              <small className="form-hint">
                 💡 Image is optional for news articles
               </small>
             </div>
@@ -601,7 +733,7 @@ function Admin() {
                 value={companyName}
                 onChange={(e) => setCompanyName(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="e.g., Smartlink Group, LLC"
                 maxLength={200}
               />
@@ -615,7 +747,6 @@ function Admin() {
                 className="form-textarea"
                 placeholder="Enter company description"
                 maxLength={5000}
-                style={{ minHeight: '150px' }}
               />
             </div>
             <div className="form-group">
@@ -625,7 +756,7 @@ function Admin() {
                 value={industry}
                 onChange={(e) => setIndustry(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="e.g., Telecommunication Services"
                 maxLength={200}
               />
@@ -637,7 +768,7 @@ function Admin() {
                 value={initialInvestment}
                 onChange={(e) => setInitialInvestment(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
               />
             </div>
             <div className="form-group">
@@ -647,7 +778,7 @@ function Admin() {
                 value={headquarters}
                 onChange={(e) => setHeadquarters(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="e.g., Annapolis, MD"
                 maxLength={200}
               />
@@ -659,7 +790,7 @@ function Admin() {
                 value={acquisitions}
                 onChange={(e) => setAcquisitions(parseInt(e.target.value) || 0)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="e.g., 1"
                 min="0"
               />
@@ -671,7 +802,7 @@ function Admin() {
                 value={status}
                 onChange={(e) => setStatus(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="e.g., Realized (July 2022) or Active"
                 maxLength={200}
               />
@@ -683,7 +814,7 @@ function Admin() {
                 value={fund}
                 onChange={(e) => setFund(e.target.value)}
                 disabled={isUploading}
-                className="form-input"
+                className="form-input2"
                 placeholder="e.g., Greenhall SPV"
                 maxLength={200}
               />
@@ -697,7 +828,7 @@ function Admin() {
                 disabled={isUploading}
                 className="form-file-input"
               />
-              <small style={{ color: '#666', display: 'block', marginTop: '5px' }}>
+              <small className="form-hint">
                 💡 Company logo is optional
               </small>
             </div>
@@ -709,7 +840,7 @@ function Admin() {
           disabled={isUploading}
           className={`upload-button ${isUploading ? 'disabled' : ''}`}
         >
-          {isUploading ? '⏳ Uploading...' : '📤 Upload'}
+          {isUploading ? '⏳ Processing...' : isEditing ? '✅ Update' : '📤 Upload'}
         </button>
 
         {message && (
@@ -733,8 +864,8 @@ function Admin() {
               let mediaUrl = null;
               
               if (section === "team") {
-                displayTitle = item.name || "Untitled";
-                displayDescription = [item.role, item.position, item.team].filter(Boolean).join(" • ");
+                displayTitle = item.name || `${item.firstName || ''} ${item.lastName || ''}`.trim() || "Untitled";
+                displayDescription = item.position || "";
                 mediaUrl = item.imageUrl;
               } else if (section === "news") {
                 displayTitle = item.title || "Untitled";
@@ -746,8 +877,10 @@ function Admin() {
                 mediaUrl = item.logoUrl;
               }
               
+              const isCurrentlyEditing = editingItemId === item._id;
+              
               return (
-                <div key={item._id} className="item-card">
+                <div key={item._id} className={`item-card ${isCurrentlyEditing ? 'editing' : ''}`}>
                   {mediaUrl && (
                     <img
                       src={mediaUrl}
@@ -764,10 +897,11 @@ function Admin() {
                     <h4 className="item-title">{displayTitle}</h4>
                     
                     {section === "team" && (
-                      <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                      <div className="item-details">
+                        {item.team && <p><strong>Team:</strong> {item.team}</p>}
+                        {item.order !== undefined && <p><strong>Order:</strong> {item.order}</p>}
+                        {item.position && <p><strong>Position:</strong> {item.position}</p>}
                         {item.information && <p><strong>Bio:</strong> {item.information.substring(0, 100)}{item.information.length > 100 ? '...' : ''}</p>}
-                        {item.email && <p><strong>Email:</strong> {item.email}</p>}
-                        {item.phone && <p><strong>Phone:</strong> {item.phone}</p>}
                       </div>
                     )}
                     
@@ -778,7 +912,7 @@ function Admin() {
                     )}
                     
                     {section === "portfolio" && (
-                      <div style={{ fontSize: '14px', color: '#666', marginBottom: '10px' }}>
+                      <div className="item-details">
                         <p><strong>Industry:</strong> {item.industry}</p>
                         <p><strong>Initial Investment:</strong> {new Date(item.initialInvestment).toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}</p>
                         <p><strong>Headquarters:</strong> {item.headquarters}</p>
@@ -797,12 +931,21 @@ function Admin() {
                       </p>
                     )}
 
-                    <button
-                      onClick={() => deleteItem(item._id, displayTitle)}
-                      className="delete-button"
-                    >
-                      🗑️ Delete
-                    </button>
+                    <div className="item-actions">
+                      <button
+                        onClick={() => startEdit(item)}
+                        className="edit-button"
+                        disabled={isEditing}
+                      >
+                        ✏️ Edit
+                      </button>
+                      <button
+                        onClick={() => deleteItem(item._id, displayTitle)}
+                        className="delete-button"
+                      >
+                        🗑️ Delete
+                      </button>
+                    </div>
                   </div>
                 </div>
               );

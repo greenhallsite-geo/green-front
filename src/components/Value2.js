@@ -3,7 +3,7 @@ import '../styles/Value2.css';
 
 const pic1 = `${process.env.PUBLIC_URL}/gr1.png`;
 const pic2 = `${process.env.PUBLIC_URL}/gr2.png`;
-const pic3 = `${process.env.PUBLIC_URL}/gr3.png`;
+const pic3 = `${process.env.PUBLIC_URL}/gr8.png`;
 const pic4 = `${process.env.PUBLIC_URL}/gr4.png`;
 
 function Value2() {
@@ -15,11 +15,11 @@ function Value2() {
       image: pic4,
       heading: 'Organizational Enhancements',
       items: [
-        'Comprehensive evaluation of business operations aligned with industry best practices',
-        'Build experienced management teams to drive long-term performance and operational excellence',
-        'Assess business operations and align with industry best practices',
-        'Implement strategic investment plans designed to maximize growth and value creation',
-        'Foster strong, value-driven partnerships with stakeholders, including industry experts and business leaders'
+        'Conduct data-driven operational assessments to ensure alignment with best practices and strategic priorities',
+        'Support high-caliber management teams focused on sustained performance and operational discipline',
+        'Enhance organizational processes and structures to improve efficiency and scalability',
+        'Execute disciplined investment initiatives that drive growth and strengthen competitive positioning',
+        'Build collaborative, value-driven partnerships with stakeholders to support long-term success'
       ]
     },
     {
@@ -27,11 +27,11 @@ function Value2() {
       image: pic2,
       heading: 'Operational Improvements',
       items: [
-        'Work closely with management teams to identify and optimize core competencies',
-        'Implement operational improvement plans focused on driving business efficiency',
-        'Execute add-on acquisitions and efficient integration strategies to build scalable platforms',
-        'Leverage deep industry knowledge and experience across diverse business cycles',
-        'Drive organic growth initiatives and performance improvements'
+        'Partner with management to strengthen and operationalize core competencies',
+        'Implement focused operational improvements to enhance efficiency and performance',
+        'Execute disciplined add-on acquisitions and integration to build scalable platforms',
+        'Leverage deep sector expertise across cycles to inform strategy and drive value',
+        'Advance organic growth initiatives and targeted performance enhancements'
       ]
     },
     {
@@ -39,11 +39,11 @@ function Value2() {
       image: pic3,
       heading: 'Capital Strategy',
       items: [
-        'Develop strategic investment plans aligned with long-term objectives',
-        'Focus on mission-critical and essential services companies in the middle market',
-        'Build robust platforms through both organic growth and targeted M&A opportunities',
-        'Optimize capital structure with flexible investment approaches',
-        'Maintain long-term investment perspective measured in years rather than months'
+        'Formulate disciplined investment strategies aligned with long-term value creation',
+        'Target mission-critical, essential services businesses within the North American middle market',
+        'Build durable platforms through a balanced approach to organic expansion and targeted M&amp;A',
+        'Structure capital solutions with flexibility to support growth, resilience, and strategic optionality',
+        'Maintain a patient, long-term investment horizon focused on sustainable performance over years—not cycles'
       ]
     }
   ];
@@ -67,10 +67,14 @@ function Value2() {
           </h2>
           <div className="values-cards__text">
             <div className="values-cards__text-left">
-              <p>Greenhall Capital Partners has built strong relationships with key stakeholders ranging from business owners and management teams to distinguished industry leaders and professional investors, by partnering with essential services companies.</p>
+              <p>Greenhall Capital Partners has established enduring partnerships with business
+owners, management teams, industry leaders, and professional investors by focusing
+on essential services companies that underpin the broader economy.</p>
+
             </div>
             <div className="values-cards__text-right">
-              <p>We seek to leverage the vantage points and resources of these relationships to create and pursue collaborative investment opportunities that drive sustainable growth and value creation.</p>
+              <p>Our Portfolio Resource Group, the Greenhall Operating Advisory Team (G.O.A.T.), partners closely with management to enhance strategic, operational and commercial capabilities. This dedicated team ensures that every portfolio company is positioned to capitalize on growth opportunities and achieve sustained long-term performance.</p>
+             
             </div>
           </div>
         </div>

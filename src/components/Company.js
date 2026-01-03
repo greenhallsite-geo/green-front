@@ -11,6 +11,11 @@ function CompanyPage() {
 
   const API_BASE_URL = "https://green-back-wgz9.onrender.com";
 
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   useEffect(() => {
     // Check if company data was passed via navigation state
     if (location.state?.company) {

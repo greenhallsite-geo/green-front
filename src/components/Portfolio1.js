@@ -17,7 +17,11 @@ function Portfolio1() {
                 Transforming Vision into Value
               </h2>
               <p className="six-blocks__text">
-                Our vision and strategy is centered around identifying transformative opportunities and driving sustainable growth. We focus on aligning our strategic objectives with market trends and industry dynamics to create lasting value.
+                Our vision and strategy center on identifying transformative opportunities and
+driving sustainable, long-term growth. We align our investment objectives with
+broader market trends and industry dynamics, enabling us to anticipate
+change, allocate capital with conviction and build enduring value for all
+stakeholders.
               </p>
             </div>
             

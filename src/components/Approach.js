@@ -31,7 +31,7 @@ function Approach() {
                 01
               </p>
               <div className="approach-card-text" style={{color: '#ffffff'}}>
-                <p>Market Analysis</p>
+                <p>Industry Expertise</p>
               </div>
             </div>
 
@@ -44,7 +44,7 @@ function Approach() {
                 02
               </p>
               <div className="approach-card-text" style={{color: '#ffffff'}}>
-                <p>Investment Planning</p>
+                <p>Investment Discipline</p>
               </div>
             </div>
 

@@ -1,0 +1,206 @@
+/* FONTS */
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Roman.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'Chronicle Display';
+  src: url('./font/Chronicle\ Display\ Black.otf') format('opentype');
+  font-weight: 300;
+  font-style: italic;
+}
+
+/* --- MAIN WRAPPER --- */
+.service-blocks {
+  background-color: #fff;
+  padding: 5rem 0; /* Reduced vertical padding */
+  width: 100%;
+  overflow: hidden; /* Prevents horizontal scrollbar */
+}
+
+.service-container {
+  max-width: 1200px; /* Slightly smaller container for tighter look */
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.service-blocks__wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* --- HEADING (Top "Criteria") --- */
+.service-blocks__heading {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 1rem; /* Smaller */
+  font-weight: normal;
+  line-height: 1.5rem;
+  color: #537689;
+  text-transform: uppercase;
+  letter-spacing: 0.1rem;
+}
+
+/* --- GRID SYSTEM --- */
+.service-blocks__cards {
+  display: grid;
+  /* 4 Columns Desktop */
+  grid-template-columns: repeat(4, 1fr);
+  /* Tighter gap */
+  gap: 1rem; 
+  width: 100%;
+}
+
+/* --- CONTENT SECTION (The Text Block) --- */
+.service-blocks__content {
+  grid-column: span 2; /* Takes up 2 blocks space */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-right: 20px;
+  /* IMPORTANT: Removed fixed height/aspect ratio to let text fit naturally */
+  min-height: 200px; 
+}
+
+#service-title {
+  font-family: "Chronicle Display", sans-serif;
+  font-size: 2.2rem; /* Smaller Desktop Font */
+  font-weight: 300;
+  line-height: 1.2;
+  color: #000;
+  margin: 0 0 1rem 0;
+  width: 100%; /* Fixes overflow */
+  max-width: 100%;
+}
+
+.service-blocks__text {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 300;
+  line-height: 1.5;
+  color: #333;
+  margin: 0;
+  width: 100%; /* Fixes overflow */
+  max-width: 480px; /* readable line length */
+}
+
+/* --- CARDS (The Cubes) --- */
+.service-blocks__card--type3 {
+  /* Smaller padding for smaller cubes */
+  padding: 1.5rem; 
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  /* Aspect ratio makes them squares, but allows growth if text is long */
+  aspect-ratio: 1 / 1; 
+  min-height: 200px;
+  transition: transform 0.3s ease;
+}
+
+.service-blocks__card--type3:hover {
+  transform: translateY(-5px);
+}
+
+.service-blocks__card--border-top {
+  border-top: 1px solid #2C5F4D;
+}
+
+/* --- CARD TYPOGRAPHY --- */
+.service-subtitle {
+  font-family: "Chronicle Display", sans-serif;
+  font-size: 1.3rem; /* Smaller */
+  font-weight: normal;
+  line-height: 1.2;
+  margin: 0 0 10px 0;
+}
+
+.service-blocks__card-text p {
+  margin: 0;
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.8rem; /* Small text to fit in cube */
+  font-weight: 300;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+/* --- FOOTNOTE --- */
+.service-blocks__footnote {
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 1px solid #E0E0E0;
+}
+
+.service-blocks__footnote p {
+  font-family: "Trada Sans", sans-serif;
+  font-size: 0.8rem;
+  color: #666;
+  line-height: 1.4;
+}
+
+/* =========================================
+   RESPONSIVE (TABLET & MOBILE)
+   ========================================= */
+
+/* Tablet (Under 1024px) */
+@media (max-width: 1024px) {
+  .service-blocks__cards {
+    /* Switch to 2 columns */
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .service-blocks__content {
+    grid-column: span 2; /* Title still spans full width of the 2 cols */
+    margin-bottom: 1rem;
+    aspect-ratio: auto; /* Let height grow naturally */
+  }
+  
+  .service-blocks__card--type3 {
+    aspect-ratio: auto; /* Allow rectangles on tablet */
+    min-height: 180px;
+  }
+}
+
+/* Mobile (Under 600px) */
+@media (max-width: 600px) {
+  .service-container {
+    padding: 0 20px;
+  }
+
+  .service-blocks {
+    padding: 3rem 0;
+  }
+
+  .service-blocks__cards {
+    /* On mobile, switch to 1 column to prevent overflow */
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .service-blocks__content {
+    grid-column: span 1;
+    width: 100%;
+  }
+
+  #service-title {
+    font-size: 1.8rem; /* Responsive Font */
+    width: 100%;
+  }
+
+  .service-blocks__text {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .service-blocks__card--type3 {
+    padding: 1.5rem;
+    min-height: auto; /* Auto height for text content */
+    aspect-ratio: auto; /* Stop forcing square on mobile */
+  }
+
+  .service-subtitle {
+    font-size: 1.2rem;
+  }
+}

@@ -3,7 +3,7 @@ import '../styles/Firm.css'
 
 const craneLeft = `${process.env.PUBLIC_URL}/firm2.jpg`;
 const craneRight = `${process.env.PUBLIC_URL}/firm.jpg`;
-const logo = `${process.env.PUBLIC_URL}/logo.svg`;
+const logo = `${process.env.PUBLIC_URL}/l1.png`;
 
 function Firm() {
   const [count1, setCount1] = useState(0);
@@ -12,24 +12,28 @@ function Firm() {
   const [count4, setCount4] = useState(0);
   const sectionRef = useRef(null);
 
+  // SET YOUR SPEED HERE (in milliseconds)
+  // 2000 = 2 seconds (Fast)
+  // 4000 = 4 seconds (Slow)
+  const ANIMATION_DURATION = 4000; 
+
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            // Animate 4.1B
-            animateValue(setCount1, 0, 4.1, 2000, true);
+            // 1. Firm Founded (2018)
+            animateValue(setCount1, 2000, 2018, ANIMATION_DURATION, true);
             
-            // Animate 17
-            animateValue(setCount2, 0, 17, 2000);
+            // 2. Team Members (6)
+            animateValue(setCount2, 0, 8, ANIMATION_DURATION);
             
-            // Animate 21
-            animateValue(setCount3, 0, 21, 2000);
+            // 3. Industry Specialists (9)
+            animateValue(setCount3, 0, 9, ANIMATION_DURATION);
             
-            // Animate 15
-            animateValue(setCount4, 0, 15, 2000);
+            // 4. Investments (12)
+            animateValue(setCount4, 0, 12, ANIMATION_DURATION);
 
-            // Immediately disconnect after first trigger
             observer.disconnect();
           }
         });
@@ -46,18 +50,25 @@ function Firm() {
     };
   }, []);
 
-  const animateValue = (setter, start, end, duration, isBillion = false) => {
+  const animateValue = (setter, start, end, duration, isYear = false) => {
     const range = end - start;
-    const increment = range / (duration / 16);
+    // 16ms is approximately 1 frame (60fps)
+    // We calculate how much to add per frame
+    const totalFrames = duration / 16; 
+    const increment = range / totalFrames; 
+    
     let current = start;
 
     const timer = setInterval(() => {
       current += increment;
+
       if (current >= end) {
-        setter(isBillion ? '4.1B' : Math.round(end));
+        // Ensure we land exactly on the end number
+        setter(Math.round(end));
         clearInterval(timer);
       } else {
-        setter(isBillion ? `${current.toFixed(1)}B` : Math.round(current));
+        // Update state
+        setter(Math.round(current));
       }
     }, 16);
   };
@@ -73,11 +84,11 @@ function Firm() {
             <div className="firm-content firm-content--border">
               <h2 className="firm-title">What We Do</h2>
               <p className="firm-text">
-                At Greenhall Capital, we are dedicated to providing our 
-                clients with innovative investment solutions. We combine 
-                strategic insight with a commitment to exceptional client 
-                service to meet the unique needs of each individual and institution
-                we serve.
+               At Greenhall Capital, we make control investments in leading North American middle
+market business services companies, executing a disciplined buy-and-build strategy to
+accelerate growth and scale. Our differentiated model combines sector-focused
+expertise across technology, telecommunications, and industrial services with
+thematic investment insights and a rigorous approach to value creation.
               </p>
             </div>
             
@@ -101,11 +112,10 @@ function Firm() {
             {/* Stats Card 1 - Black */}
             <div className="firm-card firm-card--type3" style={{backgroundColor: '#000000'}}>
               <p className="firm-card-number" style={{color: '#ffffff'}}>
-                ${count1}
+                {count1}
               </p>
               <div className="firm-card-text" style={{color: '#ffffff'}}>
-                <p>Assets Under</p>
-                <p>Management</p>
+                <p>Firm Founded</p>
               </div>
             </div>
             
@@ -134,7 +144,7 @@ function Firm() {
             {/* Stats Card 4 - White with border */}
             <div className="firm-card firm-card--type3 firm-card--border-bottom" style={{backgroundColor: '#ffffff'}}>
               <p className="firm-card-number" style={{color: '#000000'}}>
-                {count4}
+                {count4} +
               </p>
               <div className="firm-card-text" style={{color: '#000000'}}>
                 <p>Investments</p>

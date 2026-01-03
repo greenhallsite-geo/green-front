@@ -1,43 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="theme-color" content="#000000" />
-    <meta
-      name="description"
-      content="Web site created using create-react-app"
-    />
-    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
-    <!--
-      manifest.json provides metadata used when your web app is installed on a
-      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
-    -->
-    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
-    <!--
-      Notice the use of %PUBLIC_URL% in the tags above.
-      It will be replaced with the URL of the `public` folder during the build.
-      Only files inside the `public` folder can be referenced from the HTML.
+<head>
+<meta charset="utf-8" />
+<link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="theme-color" content="#001B22" />
 
-      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
-      work correctly both with client-side routing and a non-root public URL.
-      Learn how to configure a non-root public URL by running `npm run build`.
-    -->
-    <title>React App</title>
-  </head>
-  <body>
-    <noscript>You need to enable JavaScript to run this app.</noscript>
-    <div id="root"></div>
-    <!--
-      This HTML file is a template.
-      If you open it directly in the browser, you will see an empty page.
+<!-- SEO Meta Tags -->
+<meta
+  name="description"
+  content="Greenhall Capital Partners - An operationally focused control buyout platform investing in mission critical and essential services companies in the middle market. $4.1B AUM."
+/>
+<meta
+  name="keywords"
+  content="Greenhall Capital, private equity, middle market, control buyout, essential services, investment management, portfolio companies, M&A, value creation"
+/>
+<meta name="author" content="Greenhall Capital Partners" />
 
-      You can add webfonts, meta tags, or analytics to this file.
-      The build step will place the bundled scripts into the <body> tag.
+<!-- Open Graph / Facebook -->
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://greenhallcapital.com/" />
+<meta property="og:title" content="Greenhall Capital Partners - Valued Management for the Future" />
+<meta property="og:description" content="An operationally focused control buyout platform investing in mission critical and essential services companies in the middle market." />
+<meta property="og:image" content="%PUBLIC_URL%/og-image.jpg" />
 
-      To begin the development, run `npm start` or `yarn start`.
-      To create a production bundle, use `npm run build` or `yarn build`.
-    -->
-  </body>
+<!-- Twitter -->
+<meta property="twitter:card" content="summary_large_image" />
+<meta property="twitter:url" content="https://greenhallcapital.com/" />
+<meta property="twitter:title" content="Greenhall Capital Partners - Valued Management for the Future" />
+<meta property="twitter:description" content="An operationally focused control buyout platform investing in mission critical and essential services companies in the middle market." />
+<meta property="twitter:image" content="%PUBLIC_URL%/twitter-image.jpg" />
+
+<!-- Apple Touch Icon -->
+<link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+
+<!-- Manifest -->
+<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+
+<!-- Preconnect to external domains for performance -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<!-- Canonical URL -->
+<link rel="canonical" href="https://greenhallcapital.com/" />
+
+<!-- Title -->
+<title>Greenhall Capital Partners - Private Equity & Investment Management</title>
+
+<!-- Structured Data (JSON-LD) -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FinancialService",
+  "name": "Greenhall Capital Partners",
+  "description": "An operationally focused control buyout platform investing in mission critical and essential services companies in the middle market.",
+  "url": "https://greenhallcapital.com",
+  "logo": "https://greenhallcapital.com/logo.png",
+  "address": [
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "1900 M St., NW, Suite 550",
+      "addressLocality": "Washington",
+      "addressRegion": "DC",
+      "postalCode": "20036",
+      "addressCountry": "US"
+    },
+    {
+      "@type": "PostalAddress",
+      "streetAddress": "1230 Rosecrans Avenue, Suite 610",
+      "addressLocality": "Manhattan Beach",
+      "addressRegion": "CA",
+      "postalCode": "90266",
+      "addressCountry": "US"
+    }
+  ],
+  "contactPoint": {
+    "@type": "ContactPoint",
+    "telephone": "+1-202-765-3077",
+    "contactType": "customer service",
+    "email": "info@greenhallcapital.com"
+  },
+  "sameAs": [
+    "https://www.linkedin.com/company/greenhall-capital/"
+  ]
+}
+</script>
+</head>
+<body>
+<noscript>You need to enable JavaScript to run this app.</noscript>
+<div id="root"></div>
+</body>
 </html>

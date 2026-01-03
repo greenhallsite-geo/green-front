@@ -13,7 +13,15 @@ function History() {
             </div>
             <div className="our-history__text">
               <p>
-                Greenhall's foundation and guiding principles were established over light fare on the roof of the Hay-Adams hotel in downtown Washington, DC. Our journey began with a simple yet ambitious goal: to deliver superior returns for our investors, exceptional service to our clients, and ample growth opportunities for our employees. This vision, established at our inception, continues to drive our expansion and underpins our unwavering commitment to valued management for the future.
+              Greenhall’s foundation and guiding principles were first shaped during an early
+discussion over light fare atop the Hay-Adams Hotel in Washington, D.C. From that
+moment, our mission was clear: to deliver superior returns for our investors, exceptional
+service to our portfolio companies and meaningful growth opportunities for our people.
+              </p>
+              <p>
+             What began as a simple yet ambitious vision has become the cornerstone of our firm.
+These principles continue to guide our expansion and reinforce our long-term
+commitment to disciplined stewardship, partnership and value creation for the future.
               </p>
             </div>
           </div>

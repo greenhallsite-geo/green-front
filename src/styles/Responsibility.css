@@ -174,11 +174,29 @@
 /* Text Container */
 .four-blocks__text {
   width: 100%;
+
 }
 
 .four-blocks__text-left {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 97%;
+  gap: 25px;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
+.four-blocks__text-left p:first-child {
+  flex: 0 0 60%; /* 60% width for first paragraph */
+}
+
+.four-blocks__text-left p:last-child {
+  flex: 0 0 40%; /* 40% width for second paragraph */
+}
+
+.title_text__text{
   width: 100%;
-  max-width: 50%;
 }
 
 @media (max-width: 1024px) {
@@ -279,6 +297,17 @@
     font-size: 2rem;
     margin-bottom: 0.5rem;
   }
+  .four-blocks__text-left {
+  display: flex;
+  flex-direction: column;
+
+  width: 97%;
+  gap: 15px;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
+
 }
 
 /* Card Text */
@@ -300,6 +329,16 @@
   .four-blocks__card-text p {
     font-size: 0.85rem;
   }
+   .four-blocks__text-left {
+  display: flex;
+  flex-direction: column;
+
+  width: 97%;
+  gap: 15px;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
 }
 
 @media (max-width: 540px) {
@@ -363,6 +402,16 @@
   .four-blocks__card-number {
     font-size: 2.6rem;
   }
+   .four-blocks__text-left {
+  display: flex;
+  flex-direction: column;
+
+  width: 97%;
+  gap: 15px;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
 }
 
 /* Tablet Portrait - 768px to 920px */
@@ -415,6 +464,16 @@
     font-size: 0.8rem;
     line-height: 1.2rem;
   }
+   .four-blocks__text-left {
+  display: flex;
+  flex-direction: column;
+
+  width: 97%;
+  gap: 15px;
+  margin-left: auto;
+  margin-right: auto;
+ 
+}
 }
 
 /* Large Mobile - 540px to 768px */

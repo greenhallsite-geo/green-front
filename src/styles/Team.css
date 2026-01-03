@@ -152,7 +152,7 @@
 
 .team-slider__face {
   width: 100%;
-  aspect-ratio: 1 / 1; /* Modern square ratio */
+  height: 380px; /* Fixed tall height for desktop */
   background-color: rgba(86, 127, 109, 0.3);
   margin-bottom: 1rem;
   overflow: hidden;
@@ -307,8 +307,8 @@
   }
 
   .team-slider__face {
-    aspect-ratio: 1 / 1; /* Keep square, but flexible height */
-    height: auto;
+    height: 500px; /* Fixed tall height for mobile */
+    aspect-ratio: auto; /* Override aspect ratio on mobile */
   }
 
   /* 3. Links Section */
@@ -339,5 +339,95 @@
   
   .team-slider__link-text {
     text-align: left;
+  }
+}
+
+
+
+
+/* Skeleton Loading Styles */
+.team-slider__skeleton {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+  animation: skeleton-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes skeleton-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.team-slider__skeleton-slide {
+  width: 50%;
+  padding-right: 1.5rem;
+  flex-shrink: 0;
+  box-sizing: border-box;
+}
+
+.team-slider__skeleton-face {
+  width: 100%;
+  height: 380px;
+  background: linear-gradient(
+    90deg,
+    rgba(86, 127, 109, 0.15) 0%,
+    rgba(86, 127, 109, 0.25) 50%,
+    rgba(86, 127, 109, 0.15) 100%
+  );
+  background-size: 200% 100%;
+  margin-bottom: 1rem;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+@keyframes skeleton-shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.team-slider__skeleton-name {
+  height: 1.4rem;
+  width: 60%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 27, 34, 0.1) 0%,
+    rgba(0, 27, 34, 0.15) 50%,
+    rgba(0, 27, 34, 0.1) 100%
+  );
+  background-size: 200% 100%;
+  margin-bottom: 0.5rem;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+.team-slider__skeleton-position {
+  height: 1.1rem;
+  width: 40%;
+  background: linear-gradient(
+    90deg,
+    rgba(0, 27, 34, 0.08) 0%,
+    rgba(0, 27, 34, 0.12) 50%,
+    rgba(0, 27, 34, 0.08) 100%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 2s ease-in-out infinite;
+}
+
+/* Mobile skeleton adjustments */
+@media (max-width: 968px) {
+  .team-slider__skeleton-slide {
+    width: 100%;
+    padding-right: 0;
+  }
+
+  .team-slider__skeleton-face {
+    height: 400px;
   }
 }

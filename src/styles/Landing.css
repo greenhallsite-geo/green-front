@@ -126,7 +126,7 @@ html{
 .landing-title {
   font-family: 'Chronicle Display', serif;
   font-weight: normal;
-  font-size: 4.5rem;
+  font-size: 3.01rem;
   line-height: 5.875rem;
   font-style: normal;
   text-align: left;
@@ -348,7 +348,7 @@ html{
     padding-left: 30px;
     padding-right: 30px;
     max-width: 100%;
-    margin-top: 90px;
+    margin-top: 9 0px;
   }
   
   .landing-title {

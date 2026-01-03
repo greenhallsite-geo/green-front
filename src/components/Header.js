@@ -24,12 +24,28 @@ function Header() {
     // Handle Portfolio page navigation
     if (href === '/portfolio') {
       navigate('/portfolio');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Handle Team page navigation
+    if (href === '/team') {
+      navigate('/team');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
+
+    // Handle Contact Form page navigation
+    if (href === '/contact') {
+      navigate('/contact');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     
     // Handle Terms and Privacy pages
     if (href === '/terms' || href === '/privacy') {
       navigate(href);
+      window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
     }
     
@@ -95,13 +111,13 @@ function Header() {
                 <a href="/portfolio" onClick={(e) => handleNavClick(e, '/portfolio')}>Portfolio</a>
               </li>
               <li className="menu-item">
-                <a href="/#team" onClick={(e) => handleNavClick(e, '/#team')}>Team</a>
+                <a href="/team" onClick={(e) => handleNavClick(e, '/team')}>Team</a>
               </li>
               <li className="menu-item">
                 <a href="/#responsibility" onClick={(e) => handleNavClick(e, '/#responsibility')}>Responsibility</a>
               </li>
               <li className="menu-item">
-                <a href="#contacts" onClick={(e) => handleNavClick(e, '#contacts')}>Contact</a>
+                <a href="/contact" onClick={(e) => handleNavClick(e, '/contact')}>Contact</a>
               </li>
             </ul>
           </nav>
@@ -130,15 +146,15 @@ function Header() {
             </a>
             <div className="header-burger__close" onClick={toggleMenu}>
               <div className="header-burger__burger">
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
-                <div className="header-burger__square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
+                <div className="header__button-square"></div>
               </div>
             </div>
           </div>
@@ -162,7 +178,7 @@ function Header() {
               </a>
             </li>
             <li>
-              <a href="/#team" onClick={(e) => handleNavClick(e, '/#team')}>
+              <a href="/team" onClick={(e) => handleNavClick(e, '/team')}>
                 <span className="burger-menu-triangle"></span>
                 Team
               </a>
@@ -174,7 +190,7 @@ function Header() {
               </a>
             </li>
             <li>
-              <a href="#contacts" onClick={(e) => handleNavClick(e, '#contacts')}>
+              <a href="/contact" onClick={(e) => handleNavClick(e, '/contact')}>
                 <span className="burger-menu-triangle"></span>
                 Contact
               </a>

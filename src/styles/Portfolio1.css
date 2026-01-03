@@ -3,6 +3,9 @@
   padding: 7.25rem 0;
   width: 100%;
 }
+.six-blocks__text{
+  width: 500px;
+}
 
 @media (max-width: 540px) {
   .six-blocks {
@@ -92,14 +95,14 @@
 
 .six-blocks__title {
   font-family: "Chronicle Display", sans-serif;
-  font-size: 3.8rem;
+  font-size: 3.2rem;
   font-weight: 300;
   line-height: 4.2rem;
   font-style: normal;
   text-align: left;
   color: #000;
   margin: 0;
-  margin-bottom: 1.7rem;
+  margin-bottom: 1rem;
   position: relative;
   top: -0.4rem;
 }
@@ -122,7 +125,8 @@
 
 .six-blocks__text {
   font-family: "Trada Sans", sans-serif;
-  font-size: 1rem;
+  font-size: 0.9rem;
+  width: 550px;
   font-weight: 300;
   line-height: 1.6rem;
   font-style: normal;
@@ -258,4 +262,11 @@
     font-size: 0.75rem;
     line-height: 1.2rem;
   }
+
+  .six-blocks__text{
+  width: 300px;
 }
+}
+
+
+
